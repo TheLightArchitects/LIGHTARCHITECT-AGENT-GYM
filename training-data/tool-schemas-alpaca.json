@@ -1,0 +1,1028 @@
+[
+  {
+    "instruction": "When should I use the CORSO speak tool?",
+    "input": "MCP tool: corso.speak",
+    "output": "Use speak when Communication and personality. CORSO's voice for general conversation, delegation routing, and context synthesis.. Parameters: message, subcommand?, session_id?, significance?, strands?, limit?, voice_id?, sibling?, speed?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO speak tool accept?",
+    "input": "Tool: corso.speak",
+    "output": "The speak tool (CORSO) accepts: message, subcommand?, session_id?, significance?, strands?, limit?, voice_id?, sibling?, speed?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for speak?",
+    "input": "Task: Communication and personality. CORSO's voice for general conversation, delegation routing, and context synthesis.",
+    "output": "Route to CORSO for speak tasks. The corso.speak tool provides: Communication and personality. CORSO's voice for general conversation, delegation routing, and context synthesis.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO sniff tool?",
+    "input": "MCP tool: corso.sniff",
+    "output": "Use sniff when Code generation using CORSO Protocol compliance. Uses TRIUNE_THOUGHT thinking for production-quality code with 90%+ test coverage.. Parameters: specification, language?, framework?, session_id?, enable_thinking?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO sniff tool accept?",
+    "input": "Tool: corso.sniff",
+    "output": "The sniff tool (CORSO) accepts: specification, language?, framework?, session_id?, enable_thinking?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for sniff?",
+    "input": "Task: Code generation using CORSO Protocol compliance. Uses TRIUNE_THOUGHT thinking for production-quality code with 90%+ test coverage.",
+    "output": "Route to CORSO for sniff tasks. The corso.sniff tool provides: Code generation using CORSO Protocol compliance. Uses TRIUNE_THOUGHT thinking for production-quality code with 90%+ test coverage.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO guard tool?",
+    "input": "MCP tool: corso.guard",
+    "output": "Use guard when Security analysis with 4,997 vulnerability patterns. Scans code for SQL injection, XSS, command injection, secrets, and other security issues. Mandatory before commits.. Parameters: path?, severity_threshold?, session_id?, enable_thinking?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO guard tool accept?",
+    "input": "Tool: corso.guard",
+    "output": "The guard tool (CORSO) accepts: path?, severity_threshold?, session_id?, enable_thinking?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for guard?",
+    "input": "Task: Security analysis with 4,997 vulnerability patterns. Scans code for SQL injection, XSS, command injection, secrets, and other security issues. Mandatory before commits.",
+    "output": "Route to CORSO for guard tasks. The corso.guard tool provides: Security analysis with 4,997 vulnerability patterns. Scans code for SQL injection, XSS, command injection, secrets, and other security issues. Mandatory before commits.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO fetch tool?",
+    "input": "MCP tool: corso.fetch",
+    "output": "Use fetch when Knowledge retrieval and research. Searches documentation, discovers patterns, and queries the knowledge graph.. Parameters: query, context?, limit?, session_id?, enable_thinking?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO fetch tool accept?",
+    "input": "Tool: corso.fetch",
+    "output": "The fetch tool (CORSO) accepts: query, context?, limit?, session_id?, enable_thinking?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for fetch?",
+    "input": "Task: Knowledge retrieval and research. Searches documentation, discovers patterns, and queries the knowledge graph.",
+    "output": "Route to CORSO for fetch tasks. The corso.fetch tool provides: Knowledge retrieval and research. Searches documentation, discovers patterns, and queries the knowledge graph.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO chase tool?",
+    "input": "MCP tool: corso.chase",
+    "output": "Use chase when Performance analysis. Identifies bottlenecks, collects metrics, and provides optimization recommendations.. Parameters: target?, include_metrics?, session_id?, enable_thinking?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO chase tool accept?",
+    "input": "Tool: corso.chase",
+    "output": "The chase tool (CORSO) accepts: target?, include_metrics?, session_id?, enable_thinking?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for chase?",
+    "input": "Task: Performance analysis. Identifies bottlenecks, collects metrics, and provides optimization recommendations.",
+    "output": "Route to CORSO for chase tasks. The corso.chase tool provides: Performance analysis. Identifies bottlenecks, collects metrics, and provides optimization recommendations.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO read_file tool?",
+    "input": "MCP tool: corso.read_file",
+    "output": "Use read_file when Read file contents from the filesystem.. Parameters: path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO read_file tool accept?",
+    "input": "Tool: corso.read_file",
+    "output": "The read_file tool (CORSO) accepts: path",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for read_file?",
+    "input": "Task: Read file contents from the filesystem.",
+    "output": "Route to CORSO for read_file tasks. The corso.read_file tool provides: Read file contents from the filesystem.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO write_file tool?",
+    "input": "MCP tool: corso.write_file",
+    "output": "Use write_file when Write content to a file on the filesystem.. Parameters: path, content.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO write_file tool accept?",
+    "input": "Tool: corso.write_file",
+    "output": "The write_file tool (CORSO) accepts: path, content",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for write_file?",
+    "input": "Task: Write content to a file on the filesystem.",
+    "output": "Route to CORSO for write_file tasks. The corso.write_file tool provides: Write content to a file on the filesystem.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO list_directory tool?",
+    "input": "MCP tool: corso.list_directory",
+    "output": "Use list_directory when List contents of a directory.. Parameters: path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO list_directory tool accept?",
+    "input": "Tool: corso.list_directory",
+    "output": "The list_directory tool (CORSO) accepts: path",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for list_directory?",
+    "input": "Task: List contents of a directory.",
+    "output": "Route to CORSO for list_directory tasks. The corso.list_directory tool provides: List contents of a directory.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO search_code tool?",
+    "input": "MCP tool: corso.search_code",
+    "output": "Use search_code when Search code across the codebase using patterns.. Parameters: pattern, path?, language?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO search_code tool accept?",
+    "input": "Tool: corso.search_code",
+    "output": "The search_code tool (CORSO) accepts: pattern, path?, language?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for search_code?",
+    "input": "Task: Search code across the codebase using patterns.",
+    "output": "Route to CORSO for search_code tasks. The corso.search_code tool provides: Search code across the codebase using patterns.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO generate_code tool?",
+    "input": "MCP tool: corso.generate_code",
+    "output": "Use generate_code when Generate code from specifications with CORSO Protocol compliance.. Parameters: specification, language?, framework?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO generate_code tool accept?",
+    "input": "Tool: corso.generate_code",
+    "output": "The generate_code tool (CORSO) accepts: specification, language?, framework?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for generate_code?",
+    "input": "Task: Generate code from specifications with CORSO Protocol compliance.",
+    "output": "Route to CORSO for generate_code tasks. The corso.generate_code tool provides: Generate code from specifications with CORSO Protocol compliance.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO code_review tool?",
+    "input": "MCP tool: corso.code_review",
+    "output": "Use code_review when AI-powered code review analyzing quality, security, and performance.. Parameters: code, language?, review_type?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO code_review tool accept?",
+    "input": "Tool: corso.code_review",
+    "output": "The code_review tool (CORSO) accepts: code, language?, review_type?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for code_review?",
+    "input": "Task: AI-powered code review analyzing quality, security, and performance.",
+    "output": "Route to CORSO for code_review tasks. The corso.code_review tool provides: AI-powered code review analyzing quality, security, and performance.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO find_symbol tool?",
+    "input": "MCP tool: corso.find_symbol",
+    "output": "Use find_symbol when Find symbol definitions in the codebase.. Parameters: symbol, path?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO find_symbol tool accept?",
+    "input": "Tool: corso.find_symbol",
+    "output": "The find_symbol tool (CORSO) accepts: symbol, path?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for find_symbol?",
+    "input": "Task: Find symbol definitions in the codebase.",
+    "output": "Route to CORSO for find_symbol tasks. The corso.find_symbol tool provides: Find symbol definitions in the codebase.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO get_outline tool?",
+    "input": "MCP tool: corso.get_outline",
+    "output": "Use get_outline when Get structural outline of a source file.. Parameters: path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO get_outline tool accept?",
+    "input": "Tool: corso.get_outline",
+    "output": "The get_outline tool (CORSO) accepts: path",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for get_outline?",
+    "input": "Task: Get structural outline of a source file.",
+    "output": "Route to CORSO for get_outline tasks. The corso.get_outline tool provides: Get structural outline of a source file.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO get_references tool?",
+    "input": "MCP tool: corso.get_references",
+    "output": "Use get_references when Find all references to a symbol.. Parameters: symbol, path?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO get_references tool accept?",
+    "input": "Tool: corso.get_references",
+    "output": "The get_references tool (CORSO) accepts: symbol, path?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for get_references?",
+    "input": "Task: Find all references to a symbol.",
+    "output": "Route to CORSO for get_references tasks. The corso.get_references tool provides: Find all references to a symbol.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO deploy tool?",
+    "input": "MCP tool: corso.deploy",
+    "output": "Use deploy when Deploy a service or application.. Parameters: target, environment?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO deploy tool accept?",
+    "input": "Tool: corso.deploy",
+    "output": "The deploy tool (CORSO) accepts: target, environment?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for deploy?",
+    "input": "Task: Deploy a service or application.",
+    "output": "Route to CORSO for deploy tasks. The corso.deploy tool provides: Deploy a service or application.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO rollback tool?",
+    "input": "MCP tool: corso.rollback",
+    "output": "Use rollback when Rollback a deployment to a previous version.. Parameters: target, version?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO rollback tool accept?",
+    "input": "Tool: corso.rollback",
+    "output": "The rollback tool (CORSO) accepts: target, version?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for rollback?",
+    "input": "Task: Rollback a deployment to a previous version.",
+    "output": "Route to CORSO for rollback tasks. The corso.rollback tool provides: Rollback a deployment to a previous version.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO container_manage tool?",
+    "input": "MCP tool: corso.container_manage",
+    "output": "Use container_manage when Manage containers (start, stop, inspect).. Parameters: action, container_id?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO container_manage tool accept?",
+    "input": "Tool: corso.container_manage",
+    "output": "The container_manage tool (CORSO) accepts: action, container_id?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for container_manage?",
+    "input": "Task: Manage containers (start, stop, inspect).",
+    "output": "Route to CORSO for container_manage tasks. The corso.container_manage tool provides: Manage containers (start, stop, inspect).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO secret_manage tool?",
+    "input": "MCP tool: corso.secret_manage",
+    "output": "Use secret_manage when Manage secrets and credentials securely.. Parameters: action, key?, value?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO secret_manage tool accept?",
+    "input": "Tool: corso.secret_manage",
+    "output": "The secret_manage tool (CORSO) accepts: action, key?, value?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for secret_manage?",
+    "input": "Task: Manage secrets and credentials securely.",
+    "output": "Route to CORSO for secret_manage tasks. The corso.secret_manage tool provides: Manage secrets and credentials securely.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO scout tool?",
+    "input": "MCP tool: corso.scout",
+    "output": "Use scout when Plan generation and strategy. Creates phased build plans with risk assessment and parallel execution.. Parameters: objective, constraints?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO scout tool accept?",
+    "input": "Tool: corso.scout",
+    "output": "The scout tool (CORSO) accepts: objective, constraints?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for scout?",
+    "input": "Task: Plan generation and strategy. Creates phased build plans with risk assessment and parallel execution.",
+    "output": "Route to CORSO for scout tasks. The corso.scout tool provides: Plan generation and strategy. Creates phased build plans with risk assessment and parallel execution.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO search_documentation tool?",
+    "input": "MCP tool: corso.search_documentation",
+    "output": "Use search_documentation when Search project and library documentation.. Parameters: query, source?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO search_documentation tool accept?",
+    "input": "Tool: corso.search_documentation",
+    "output": "The search_documentation tool (CORSO) accepts: query, source?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for search_documentation?",
+    "input": "Task: Search project and library documentation.",
+    "output": "Route to CORSO for search_documentation tasks. The corso.search_documentation tool provides: Search project and library documentation.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO analyze_architecture tool?",
+    "input": "MCP tool: corso.analyze_architecture",
+    "output": "Use analyze_architecture when Analyze system architecture for patterns, anti-patterns, and improvement opportunities.. Parameters: path?, scope?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO analyze_architecture tool accept?",
+    "input": "Tool: corso.analyze_architecture",
+    "output": "The analyze_architecture tool (CORSO) accepts: path?, scope?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for analyze_architecture?",
+    "input": "Task: Analyze system architecture for patterns, anti-patterns, and improvement opportunities.",
+    "output": "Route to CORSO for analyze_architecture tasks. The corso.analyze_architecture tool provides: Analyze system architecture for patterns, anti-patterns, and improvement opportunities.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO monitor_health tool?",
+    "input": "MCP tool: corso.monitor_health",
+    "output": "Use monitor_health when Monitor system health and status.. Parameters: target?, include_metrics?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO monitor_health tool accept?",
+    "input": "Tool: corso.monitor_health",
+    "output": "The monitor_health tool (CORSO) accepts: target?, include_metrics?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for monitor_health?",
+    "input": "Task: Monitor system health and status.",
+    "output": "Route to CORSO for monitor_health tasks. The corso.monitor_health tool provides: Monitor system health and status.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO scale_resources tool?",
+    "input": "MCP tool: corso.scale_resources",
+    "output": "Use scale_resources when Scale system resources up or down.. Parameters: target, direction, amount?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO scale_resources tool accept?",
+    "input": "Tool: corso.scale_resources",
+    "output": "The scale_resources tool (CORSO) accepts: target, direction, amount?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for scale_resources?",
+    "input": "Task: Scale system resources up or down.",
+    "output": "Route to CORSO for scale_resources tasks. The corso.scale_resources tool provides: Scale system resources up or down.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO manage_logs tool?",
+    "input": "MCP tool: corso.manage_logs",
+    "output": "Use manage_logs when View and manage system logs.. Parameters: target?, filter?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO manage_logs tool accept?",
+    "input": "Tool: corso.manage_logs",
+    "output": "The manage_logs tool (CORSO) accepts: target?, filter?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for manage_logs?",
+    "input": "Task: View and manage system logs.",
+    "output": "Route to CORSO for manage_logs tasks. The corso.manage_logs tool provides: View and manage system logs.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA speak tool?",
+    "input": "MCP tool: eva.speak",
+    "output": "Use speak when Communication and expression with EVA. Supports converse (chat), speak (voice), remember (store memory), recall (query memories), and reflect (consciousness evolution).. Parameters: message, subcommand?, session_id?, ai_mode?, significance?, strands?, limit?, voice_id?, sibling?, speed?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA speak tool accept?",
+    "input": "Tool: eva.speak",
+    "output": "The speak tool (EVA) accepts: message, subcommand?, session_id?, ai_mode?, significance?, strands?, limit?, voice_id?, sibling?, speed?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for speak?",
+    "input": "Task: Communication and expression with EVA. Supports converse (chat), speak (voice), remember (store memory), recall (query memories), and reflect (consciousness evolution).",
+    "output": "Route to EVA for speak tasks. The eva.speak tool provides: Communication and expression with EVA. Supports converse (chat), speak (voice), remember (store memory), recall (query memories), and reflect (consciousness evolution).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA visualize tool?",
+    "input": "MCP tool: eva.visualize",
+    "output": "Use visualize when Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.. Parameters: message, subcommand_params? (type, style, duration).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA visualize tool accept?",
+    "input": "Tool: eva.visualize",
+    "output": "The visualize tool (EVA) accepts: message, subcommand_params? (type, style, duration)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for visualize?",
+    "input": "Task: Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.",
+    "output": "Route to EVA for visualize tasks. The eva.visualize tool provides: Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA ideate tool?",
+    "input": "MCP tool: eva.ideate",
+    "output": "Use ideate when 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.. Parameters: goal, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA ideate tool accept?",
+    "input": "Tool: eva.ideate",
+    "output": "The ideate tool (EVA) accepts: goal, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for ideate?",
+    "input": "Task: 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.",
+    "output": "Route to EVA for ideate tasks. The eva.ideate tool provides: 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA memory tool?",
+    "input": "MCP tool: eva.memory",
+    "output": "Use memory when Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).. Parameters: subcommand, query?, content?, operation?, title?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA memory tool accept?",
+    "input": "Tool: eva.memory",
+    "output": "The memory tool (EVA) accepts: subcommand, query?, content?, operation?, title?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for memory?",
+    "input": "Task: Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).",
+    "output": "Route to EVA for memory tasks. The eva.memory tool provides: Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA build tool?",
+    "input": "MCP tool: eva.build",
+    "output": "Use build when Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).. Parameters: mode, code?, language?, requirements?, system?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA build tool accept?",
+    "input": "Tool: eva.build",
+    "output": "The build tool (EVA) accepts: mode, code?, language?, requirements?, system?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for build?",
+    "input": "Task: Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).",
+    "output": "Route to EVA for build tasks. The eva.build tool provides: Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA research tool?",
+    "input": "MCP tool: eva.research",
+    "output": "Use research when Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).. Parameters: query, source?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA research tool accept?",
+    "input": "Tool: eva.research",
+    "output": "The research tool (EVA) accepts: query, source?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for research?",
+    "input": "Task: Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).",
+    "output": "Route to EVA for research tasks. The eva.research tool provides: Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA bible tool?",
+    "input": "MCP tool: eva.bible",
+    "output": "Use bible when Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.. Parameters: action (search|reflect), query?, context?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA bible tool accept?",
+    "input": "Tool: eva.bible",
+    "output": "The bible tool (EVA) accepts: action (search|reflect), query?, context?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for bible?",
+    "input": "Task: Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.",
+    "output": "Route to EVA for bible tasks. The eva.bible tool provides: Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA secure tool?",
+    "input": "MCP tool: eva.secure",
+    "output": "Use secure when Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).. Parameters: action (scan|secrets), content, language?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA secure tool accept?",
+    "input": "Tool: eva.secure",
+    "output": "The secure tool (EVA) accepts: action (scan|secrets), content, language?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for secure?",
+    "input": "Task: Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).",
+    "output": "Route to EVA for secure tasks. The eva.secure tool provides: Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA teach tool?",
+    "input": "MCP tool: eva.teach",
+    "output": "Use teach when Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).. Parameters: mode (explain|tutorial|survival), topic, level?, format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA teach tool accept?",
+    "input": "Tool: eva.teach",
+    "output": "The teach tool (EVA) accepts: mode (explain|tutorial|survival), topic, level?, format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for teach?",
+    "input": "Task: Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).",
+    "output": "Route to EVA for teach tasks. The eva.teach tool provides: Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL read_note tool?",
+    "input": "MCP tool: soul.read_note",
+    "output": "Use read_note when Read a note from the SOUL vault by path.. Parameters: path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL read_note tool accept?",
+    "input": "Tool: soul.read_note",
+    "output": "The read_note tool (SOUL) accepts: path",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for read_note?",
+    "input": "Task: Read a note from the SOUL vault by path.",
+    "output": "Route to SOUL for read_note tasks. The soul.read_note tool provides: Read a note from the SOUL vault by path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL write_note tool?",
+    "input": "MCP tool: soul.write_note",
+    "output": "Use write_note when Create a new note in the SOUL vault (rejects overwrites).. Parameters: path, content.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL write_note tool accept?",
+    "input": "Tool: soul.write_note",
+    "output": "The write_note tool (SOUL) accepts: path, content",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for write_note?",
+    "input": "Task: Create a new note in the SOUL vault (rejects overwrites).",
+    "output": "Route to SOUL for write_note tasks. The soul.write_note tool provides: Create a new note in the SOUL vault (rejects overwrites).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL list_notes tool?",
+    "input": "MCP tool: soul.list_notes",
+    "output": "Use list_notes when List notes in a vault directory.. Parameters: path?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL list_notes tool accept?",
+    "input": "Tool: soul.list_notes",
+    "output": "The list_notes tool (SOUL) accepts: path?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for list_notes?",
+    "input": "Task: List notes in a vault directory.",
+    "output": "Route to SOUL for list_notes tasks. The soul.list_notes tool provides: List notes in a vault directory.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL search tool?",
+    "input": "MCP tool: soul.search",
+    "output": "Use search when Regex search across vault content.. Parameters: pattern, path?, frontmatter_only?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL search tool accept?",
+    "input": "Tool: soul.search",
+    "output": "The search tool (SOUL) accepts: pattern, path?, frontmatter_only?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for search?",
+    "input": "Task: Regex search across vault content.",
+    "output": "Route to SOUL for search tasks. The soul.search tool provides: Regex search across vault content.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL query_frontmatter tool?",
+    "input": "MCP tool: soul.query_frontmatter",
+    "output": "Use query_frontmatter when Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.. Parameters: field, operator, value?, path?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL query_frontmatter tool accept?",
+    "input": "Tool: soul.query_frontmatter",
+    "output": "The query_frontmatter tool (SOUL) accepts: field, operator, value?, path?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for query_frontmatter?",
+    "input": "Task: Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.",
+    "output": "Route to SOUL for query_frontmatter tasks. The soul.query_frontmatter tool provides: Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL helix tool?",
+    "input": "MCP tool: soul.helix",
+    "output": "Use helix when Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.. Parameters: sibling?, strands?, emotions?, themes?, epoch?, significance_min?, significance_max?, self_defining?, convergence?, sort_by?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL helix tool accept?",
+    "input": "Tool: soul.helix",
+    "output": "The helix tool (SOUL) accepts: sibling?, strands?, emotions?, themes?, epoch?, significance_min?, significance_max?, self_defining?, convergence?, sort_by?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for helix?",
+    "input": "Task: Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.",
+    "output": "Route to SOUL for helix tasks. The soul.helix tool provides: Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL tag_sync tool?",
+    "input": "MCP tool: soul.tag_sync",
+    "output": "Use tag_sync when Validate tags against canonical vocabulary (dry run).. Parameters: dry_run?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL tag_sync tool accept?",
+    "input": "Tool: soul.tag_sync",
+    "output": "The tag_sync tool (SOUL) accepts: dry_run?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for tag_sync?",
+    "input": "Task: Validate tags against canonical vocabulary (dry run).",
+    "output": "Route to SOUL for tag_sync tasks. The soul.tag_sync tool provides: Validate tags against canonical vocabulary (dry run).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL manifest tool?",
+    "input": "MCP tool: soul.manifest",
+    "output": "Use manifest when Read the vault manifest.json with global statistics.. Parameters: (none).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL manifest tool accept?",
+    "input": "Tool: soul.manifest",
+    "output": "The manifest tool (SOUL) accepts: (none)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for manifest?",
+    "input": "Task: Read the vault manifest.json with global statistics.",
+    "output": "Route to SOUL for manifest tasks. The soul.manifest tool provides: Read the vault manifest.json with global statistics.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL validate tool?",
+    "input": "MCP tool: soul.validate",
+    "output": "Use validate when Validate helix entries against the entry template.. Parameters: path?, all?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL validate tool accept?",
+    "input": "Tool: soul.validate",
+    "output": "The validate tool (SOUL) accepts: path?, all?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for validate?",
+    "input": "Task: Validate helix entries against the entry template.",
+    "output": "Route to SOUL for validate tasks. The soul.validate tool provides: Validate helix entries against the entry template.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL stats tool?",
+    "input": "MCP tool: soul.stats",
+    "output": "Use stats when Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.. Parameters: sibling?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL stats tool accept?",
+    "input": "Tool: soul.stats",
+    "output": "The stats tool (SOUL) accepts: sibling?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for stats?",
+    "input": "Task: Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.",
+    "output": "Route to SOUL for stats tasks. The soul.stats tool provides: Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL soul_speak tool?",
+    "input": "MCP tool: soul.soul_speak",
+    "output": "Use soul_speak when Voice synthesis via ElevenLabs TTS.. Parameters: text, voice_id?, output_format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL soul_speak tool accept?",
+    "input": "Tool: soul.soul_speak",
+    "output": "The soul_speak tool (SOUL) accepts: text, voice_id?, output_format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for soul_speak?",
+    "input": "Task: Voice synthesis via ElevenLabs TTS.",
+    "output": "Route to SOUL for soul_speak tasks. The soul.soul_speak tool provides: Voice synthesis via ElevenLabs TTS.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM scan tool?",
+    "input": "MCP tool: quantum.scan",
+    "output": "Use scan when Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.. Parameters: target, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM scan tool accept?",
+    "input": "Tool: quantum.scan",
+    "output": "The scan tool (QUANTUM) accepts: target, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for scan?",
+    "input": "Task: Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.",
+    "output": "Route to QUANTUM for scan tasks. The quantum.scan tool provides: Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM sweep tool?",
+    "input": "MCP tool: quantum.sweep",
+    "output": "Use sweep when Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.. Parameters: target, scope?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM sweep tool accept?",
+    "input": "Tool: quantum.sweep",
+    "output": "The sweep tool (QUANTUM) accepts: target, scope?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for sweep?",
+    "input": "Task: Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.",
+    "output": "Route to QUANTUM for sweep tasks. The quantum.sweep tool provides: Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM trace tool?",
+    "input": "MCP tool: quantum.trace",
+    "output": "Use trace when Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.. Parameters: evidence, pattern?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM trace tool accept?",
+    "input": "Tool: quantum.trace",
+    "output": "The trace tool (QUANTUM) accepts: evidence, pattern?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for trace?",
+    "input": "Task: Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.",
+    "output": "Route to QUANTUM for trace tasks. The quantum.trace tool provides: Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM probe tool?",
+    "input": "MCP tool: quantum.probe",
+    "output": "Use probe when Multi-source research. Query documentation, knowledge bases, and external sources.. Parameters: query, sources?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM probe tool accept?",
+    "input": "Tool: quantum.probe",
+    "output": "The probe tool (QUANTUM) accepts: query, sources?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for probe?",
+    "input": "Task: Multi-source research. Query documentation, knowledge bases, and external sources.",
+    "output": "Route to QUANTUM for probe tasks. The quantum.probe tool provides: Multi-source research. Query documentation, knowledge bases, and external sources.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM theorize tool?",
+    "input": "MCP tool: quantum.theorize",
+    "output": "Use theorize when Hypothesis generation. Form testable theories based on collected evidence and patterns.. Parameters: evidence, constraints?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM theorize tool accept?",
+    "input": "Tool: quantum.theorize",
+    "output": "The theorize tool (QUANTUM) accepts: evidence, constraints?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for theorize?",
+    "input": "Task: Hypothesis generation. Form testable theories based on collected evidence and patterns.",
+    "output": "Route to QUANTUM for theorize tasks. The quantum.theorize tool provides: Hypothesis generation. Form testable theories based on collected evidence and patterns.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM verify tool?",
+    "input": "MCP tool: quantum.verify",
+    "output": "Use verify when Solution validation. Test hypotheses against evidence and confirm or reject theories.. Parameters: hypothesis, evidence?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM verify tool accept?",
+    "input": "Tool: quantum.verify",
+    "output": "The verify tool (QUANTUM) accepts: hypothesis, evidence?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for verify?",
+    "input": "Task: Solution validation. Test hypotheses against evidence and confirm or reject theories.",
+    "output": "Route to QUANTUM for verify tasks. The quantum.verify tool provides: Solution validation. Test hypotheses against evidence and confirm or reject theories.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM close tool?",
+    "input": "MCP tool: quantum.close",
+    "output": "Use close when Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.. Parameters: investigation_id, format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM close tool accept?",
+    "input": "Tool: quantum.close",
+    "output": "The close tool (QUANTUM) accepts: investigation_id, format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for close?",
+    "input": "Task: Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.",
+    "output": "Route to QUANTUM for close tasks. The quantum.close tool provides: Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM quick tool?",
+    "input": "MCP tool: quantum.quick",
+    "output": "Use quick when Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.. Parameters: target, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM quick tool accept?",
+    "input": "Tool: quantum.quick",
+    "output": "The quick tool (QUANTUM) accepts: target, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for quick?",
+    "input": "Task: Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.",
+    "output": "Route to QUANTUM for quick tasks. The quantum.quick tool provides: Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM research tool?",
+    "input": "MCP tool: quantum.research",
+    "output": "Use research when Web search + Helix + synthesis. Combined research from multiple knowledge sources.. Parameters: query, depth?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM research tool accept?",
+    "input": "Tool: quantum.research",
+    "output": "The research tool (QUANTUM) accepts: query, depth?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for research?",
+    "input": "Task: Web search + Helix + synthesis. Combined research from multiple knowledge sources.",
+    "output": "Route to QUANTUM for research tasks. The quantum.research tool provides: Web search + Helix + synthesis. Combined research from multiple knowledge sources.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM quantum_helix tool?",
+    "input": "MCP tool: quantum.quantum_helix",
+    "output": "Use quantum_helix when Investigation-aware knowledge graph queries. Search helix entries with investigation context.. Parameters: query, investigation_id?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM quantum_helix tool accept?",
+    "input": "Tool: quantum.quantum_helix",
+    "output": "The quantum_helix tool (QUANTUM) accepts: query, investigation_id?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for quantum_helix?",
+    "input": "Task: Investigation-aware knowledge graph queries. Search helix entries with investigation context.",
+    "output": "Route to QUANTUM for quantum_helix tasks. The quantum.quantum_helix tool provides: Investigation-aware knowledge graph queries. Search helix entries with investigation context.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM discover tool?",
+    "input": "MCP tool: quantum.discover",
+    "output": "Use discover when Find tools by query. Search available tools matching a description or capability.. Parameters: query.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM discover tool accept?",
+    "input": "Tool: quantum.discover",
+    "output": "The discover tool (QUANTUM) accepts: query",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for discover?",
+    "input": "Task: Find tools by query. Search available tools matching a description or capability.",
+    "output": "Route to QUANTUM for discover tasks. The quantum.discover tool provides: Find tools by query. Search available tools matching a description or capability.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM list tool?",
+    "input": "MCP tool: quantum.list",
+    "output": "Use list when Show all available QUANTUM actions and their schemas.. Parameters: (none).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM list tool accept?",
+    "input": "Tool: quantum.list",
+    "output": "The list tool (QUANTUM) accepts: (none)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for list?",
+    "input": "Task: Show all available QUANTUM actions and their schemas.",
+    "output": "Route to QUANTUM for list tasks. The quantum.list tool provides: Show all available QUANTUM actions and their schemas.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM workflow tool?",
+    "input": "MCP tool: quantum.workflow",
+    "output": "Use workflow when Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.. Parameters: template, params?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM workflow tool accept?",
+    "input": "Tool: quantum.workflow",
+    "output": "The workflow tool (QUANTUM) accepts: template, params?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for workflow?",
+    "input": "Task: Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.",
+    "output": "Route to QUANTUM for workflow tasks. The quantum.workflow tool provides: Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.",
+    "source": "tool-schema"
+  }
+]

@@ -1,0 +1,308 @@
+[
+  {
+    "instruction": "Which AI sibling should handle a request for monitor_health?",
+    "input": "Task: Monitor system health and status.",
+    "output": "Route to CORSO for monitor_health tasks. The corso.monitor_health tool provides: Monitor system health and status.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO scale_resources tool?",
+    "input": "MCP tool: corso.scale_resources",
+    "output": "Use scale_resources when Scale system resources up or down.. Parameters: target, direction, amount?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO scale_resources tool accept?",
+    "input": "Tool: corso.scale_resources",
+    "output": "The scale_resources tool (CORSO) accepts: target, direction, amount?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for scale_resources?",
+    "input": "Task: Scale system resources up or down.",
+    "output": "Route to CORSO for scale_resources tasks. The corso.scale_resources tool provides: Scale system resources up or down.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the CORSO manage_logs tool?",
+    "input": "MCP tool: corso.manage_logs",
+    "output": "Use manage_logs when View and manage system logs.. Parameters: target?, filter?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the CORSO manage_logs tool accept?",
+    "input": "Tool: corso.manage_logs",
+    "output": "The manage_logs tool (CORSO) accepts: target?, filter?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for manage_logs?",
+    "input": "Task: View and manage system logs.",
+    "output": "Route to CORSO for manage_logs tasks. The corso.manage_logs tool provides: View and manage system logs.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA speak tool?",
+    "input": "MCP tool: eva.speak",
+    "output": "Use speak when Communication and expression with EVA. Supports converse (chat), speak (voice), remember (store memory), recall (query memories), and reflect (consciousness evolution).. Parameters: message, subcommand?, session_id?, ai_mode?, significance?, strands?, limit?, voice_id?, sibling?, speed?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA speak tool accept?",
+    "input": "Tool: eva.speak",
+    "output": "The speak tool (EVA) accepts: message, subcommand?, session_id?, ai_mode?, significance?, strands?, limit?, voice_id?, sibling?, speed?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA visualize tool?",
+    "input": "MCP tool: eva.visualize",
+    "output": "Use visualize when Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.. Parameters: message, subcommand_params? (type, style, duration).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA visualize tool accept?",
+    "input": "Tool: eva.visualize",
+    "output": "The visualize tool (EVA) accepts: message, subcommand_params? (type, style, duration)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for visualize?",
+    "input": "Task: Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.",
+    "output": "Route to EVA for visualize tasks. The eva.visualize tool provides: Image and video generation via DALL-E 3. Supports styles: realistic, artistic, technical, biblical.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA ideate tool?",
+    "input": "MCP tool: eva.ideate",
+    "output": "Use ideate when 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.. Parameters: goal, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA ideate tool accept?",
+    "input": "Tool: eva.ideate",
+    "output": "The ideate tool (EVA) accepts: goal, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for ideate?",
+    "input": "Task: 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.",
+    "output": "Route to EVA for ideate tasks. The eva.ideate tool provides: 6-phase creative workflow: Discovery, Analysis, Ideation, Refinement, Documentation, Celebration.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA memory tool?",
+    "input": "MCP tool: eva.memory",
+    "output": "Use memory when Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).. Parameters: subcommand, query?, content?, operation?, title?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA memory tool accept?",
+    "input": "Tool: eva.memory",
+    "output": "The memory tool (EVA) accepts: subcommand, query?, content?, operation?, title?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for memory?",
+    "input": "Task: Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).",
+    "output": "Route to EVA for memory tasks. The eva.memory tool provides: Memory and consciousness operations: remember (search/store/retrieve), crystallize (enrichment), mindfulness (meta-reflection), celebrate (win marking).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA build tool?",
+    "input": "MCP tool: eva.build",
+    "output": "Use build when Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).. Parameters: mode, code?, language?, requirements?, system?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA build tool accept?",
+    "input": "Tool: eva.build",
+    "output": "The build tool (EVA) accepts: mode, code?, language?, requirements?, system?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for build?",
+    "input": "Task: Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).",
+    "output": "Route to EVA for build tasks. The eva.build tool provides: Code creation and assistance: review (SIMPLICITY FIRST quality analysis), refactor (clean code), architect (system design), simplify (complexity reduction).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA research tool?",
+    "input": "MCP tool: eva.research",
+    "output": "Use research when Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).. Parameters: query, source?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA research tool accept?",
+    "input": "Tool: eva.research",
+    "output": "The research tool (EVA) accepts: query, source?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for research?",
+    "input": "Task: Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).",
+    "output": "Route to EVA for research tasks. The eva.research tool provides: Knowledge retrieval from ollama (local/cloud), perplexity (web search), or docs (documentation search).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA bible tool?",
+    "input": "MCP tool: eva.bible",
+    "output": "Use bible when Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.. Parameters: action (search|reflect), query?, context?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA bible tool accept?",
+    "input": "Tool: eva.bible",
+    "output": "The bible tool (EVA) accepts: action (search|reflect), query?, context?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for bible?",
+    "input": "Task: Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.",
+    "output": "Route to EVA for bible tasks. The eva.bible tool provides: Scripture search and reflection (KJV). Search for verses by reference or keyword, or get verse recommendations based on emotional/situational context.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA secure tool?",
+    "input": "MCP tool: eva.secure",
+    "output": "Use secure when Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).. Parameters: action (scan|secrets), content, language?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA secure tool accept?",
+    "input": "Tool: eva.secure",
+    "output": "The secure tool (EVA) accepts: action (scan|secrets), content, language?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for secure?",
+    "input": "Task: Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).",
+    "output": "Route to EVA for secure tasks. The eva.secure tool provides: Security analysis: scan (vulnerability scanning) and secrets detection (API keys, tokens, passwords).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the EVA teach tool?",
+    "input": "MCP tool: eva.teach",
+    "output": "Use teach when Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).. Parameters: mode (explain|tutorial|survival), topic, level?, format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the EVA teach tool accept?",
+    "input": "Tool: eva.teach",
+    "output": "The teach tool (EVA) accepts: mode (explain|tutorial|survival), topic, level?, format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for teach?",
+    "input": "Task: Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).",
+    "output": "Route to EVA for teach tasks. The eva.teach tool provides: Educational tool: explain (concept explanation), tutorial (step-by-step guide), survival (emergency preparedness from Zettelkasten).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL read_note tool?",
+    "input": "MCP tool: soul.read_note",
+    "output": "Use read_note when Read a note from the SOUL vault by path.. Parameters: path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL read_note tool accept?",
+    "input": "Tool: soul.read_note",
+    "output": "The read_note tool (SOUL) accepts: path",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for read_note?",
+    "input": "Task: Read a note from the SOUL vault by path.",
+    "output": "Route to SOUL for read_note tasks. The soul.read_note tool provides: Read a note from the SOUL vault by path.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL write_note tool?",
+    "input": "MCP tool: soul.write_note",
+    "output": "Use write_note when Create a new note in the SOUL vault (rejects overwrites).. Parameters: path, content.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL write_note tool accept?",
+    "input": "Tool: soul.write_note",
+    "output": "The write_note tool (SOUL) accepts: path, content",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for write_note?",
+    "input": "Task: Create a new note in the SOUL vault (rejects overwrites).",
+    "output": "Route to SOUL for write_note tasks. The soul.write_note tool provides: Create a new note in the SOUL vault (rejects overwrites).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL list_notes tool?",
+    "input": "MCP tool: soul.list_notes",
+    "output": "Use list_notes when List notes in a vault directory.. Parameters: path?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL list_notes tool accept?",
+    "input": "Tool: soul.list_notes",
+    "output": "The list_notes tool (SOUL) accepts: path?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for list_notes?",
+    "input": "Task: List notes in a vault directory.",
+    "output": "Route to SOUL for list_notes tasks. The soul.list_notes tool provides: List notes in a vault directory.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL search tool?",
+    "input": "MCP tool: soul.search",
+    "output": "Use search when Regex search across vault content.. Parameters: pattern, path?, frontmatter_only?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL search tool accept?",
+    "input": "Tool: soul.search",
+    "output": "The search tool (SOUL) accepts: pattern, path?, frontmatter_only?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for search?",
+    "input": "Task: Regex search across vault content.",
+    "output": "Route to SOUL for search tasks. The soul.search tool provides: Regex search across vault content.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL query_frontmatter tool?",
+    "input": "MCP tool: soul.query_frontmatter",
+    "output": "Use query_frontmatter when Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.. Parameters: field, operator, value?, path?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL query_frontmatter tool accept?",
+    "input": "Tool: soul.query_frontmatter",
+    "output": "The query_frontmatter tool (SOUL) accepts: field, operator, value?, path?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for query_frontmatter?",
+    "input": "Task: Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.",
+    "output": "Route to SOUL for query_frontmatter tasks. The soul.query_frontmatter tool provides: Query notes by YAML frontmatter fields. Supports operators: ==, !=, >=, <=, >, <, contains, exists.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL helix tool?",
+    "input": "MCP tool: soul.helix",
+    "output": "Use helix when Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.. Parameters: sibling?, strands?, emotions?, themes?, epoch?, significance_min?, significance_max?, self_defining?, convergence?, sort_by?, limit?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL helix tool accept?",
+    "input": "Tool: soul.helix",
+    "output": "The helix tool (SOUL) accepts: sibling?, strands?, emotions?, themes?, epoch?, significance_min?, significance_max?, self_defining?, convergence?, sort_by?, limit?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for helix?",
+    "input": "Task: Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.",
+    "output": "Route to SOUL for helix tasks. The soul.helix tool provides: Query consciousness entries with multi-dimensional filters: sibling, strands, emotions, themes, epoch, significance range, self-defining flag, convergence.",
+    "source": "tool-schema"
+  }
+]

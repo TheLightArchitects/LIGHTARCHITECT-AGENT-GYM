@@ -1,0 +1,320 @@
+[
+  {
+    "instruction": "When should I use the SOUL tag_sync tool?",
+    "input": "MCP tool: soul.tag_sync",
+    "output": "Use tag_sync when Validate tags against canonical vocabulary (dry run).. Parameters: dry_run?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL tag_sync tool accept?",
+    "input": "Tool: soul.tag_sync",
+    "output": "The tag_sync tool (SOUL) accepts: dry_run?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for tag_sync?",
+    "input": "Task: Validate tags against canonical vocabulary (dry run).",
+    "output": "Route to SOUL for tag_sync tasks. The soul.tag_sync tool provides: Validate tags against canonical vocabulary (dry run).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL manifest tool?",
+    "input": "MCP tool: soul.manifest",
+    "output": "Use manifest when Read the vault manifest.json with global statistics.. Parameters: (none).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL manifest tool accept?",
+    "input": "Tool: soul.manifest",
+    "output": "The manifest tool (SOUL) accepts: (none)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for manifest?",
+    "input": "Task: Read the vault manifest.json with global statistics.",
+    "output": "Route to SOUL for manifest tasks. The soul.manifest tool provides: Read the vault manifest.json with global statistics.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL validate tool?",
+    "input": "MCP tool: soul.validate",
+    "output": "Use validate when Validate helix entries against the entry template.. Parameters: path?, all?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL validate tool accept?",
+    "input": "Tool: soul.validate",
+    "output": "The validate tool (SOUL) accepts: path?, all?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for validate?",
+    "input": "Task: Validate helix entries against the entry template.",
+    "output": "Route to SOUL for validate tasks. The soul.validate tool provides: Validate helix entries against the entry template.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL stats tool?",
+    "input": "MCP tool: soul.stats",
+    "output": "Use stats when Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.. Parameters: sibling?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL stats tool accept?",
+    "input": "Tool: soul.stats",
+    "output": "The stats tool (SOUL) accepts: sibling?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for stats?",
+    "input": "Task: Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.",
+    "output": "Route to SOUL for stats tasks. The soul.stats tool provides: Vault statistics: total entries, strand frequency, emotion frequency, significance distribution.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the SOUL soul_speak tool?",
+    "input": "MCP tool: soul.soul_speak",
+    "output": "Use soul_speak when Voice synthesis via ElevenLabs TTS.. Parameters: text, voice_id?, output_format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the SOUL soul_speak tool accept?",
+    "input": "Tool: soul.soul_speak",
+    "output": "The soul_speak tool (SOUL) accepts: text, voice_id?, output_format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for soul_speak?",
+    "input": "Task: Voice synthesis via ElevenLabs TTS.",
+    "output": "Route to SOUL for soul_speak tasks. The soul.soul_speak tool provides: Voice synthesis via ElevenLabs TTS.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM scan tool?",
+    "input": "MCP tool: quantum.scan",
+    "output": "Use scan when Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.. Parameters: target, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM scan tool accept?",
+    "input": "Tool: quantum.scan",
+    "output": "The scan tool (QUANTUM) accepts: target, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for scan?",
+    "input": "Task: Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.",
+    "output": "Route to QUANTUM for scan tasks. The quantum.scan tool provides: Triage an investigation target. Quick assessment of severity, routing, and initial evidence collection.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM sweep tool?",
+    "input": "MCP tool: quantum.sweep",
+    "output": "Use sweep when Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.. Parameters: target, scope?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM sweep tool accept?",
+    "input": "Tool: quantum.sweep",
+    "output": "The sweep tool (QUANTUM) accepts: target, scope?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for sweep?",
+    "input": "Task: Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.",
+    "output": "Route to QUANTUM for sweep tasks. The quantum.sweep tool provides: Evidence collection. Gather raw facts, logs, bundles, and artifacts for analysis.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM trace tool?",
+    "input": "MCP tool: quantum.trace",
+    "output": "Use trace when Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.. Parameters: evidence, pattern?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM trace tool accept?",
+    "input": "Tool: quantum.trace",
+    "output": "The trace tool (QUANTUM) accepts: evidence, pattern?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for trace?",
+    "input": "Task: Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.",
+    "output": "Route to QUANTUM for trace tasks. The quantum.trace tool provides: Pattern forensics. Identify recurring patterns, anomalies, and correlations in evidence.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM probe tool?",
+    "input": "MCP tool: quantum.probe",
+    "output": "Use probe when Multi-source research. Query documentation, knowledge bases, and external sources.. Parameters: query, sources?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM probe tool accept?",
+    "input": "Tool: quantum.probe",
+    "output": "The probe tool (QUANTUM) accepts: query, sources?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for probe?",
+    "input": "Task: Multi-source research. Query documentation, knowledge bases, and external sources.",
+    "output": "Route to QUANTUM for probe tasks. The quantum.probe tool provides: Multi-source research. Query documentation, knowledge bases, and external sources.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM theorize tool?",
+    "input": "MCP tool: quantum.theorize",
+    "output": "Use theorize when Hypothesis generation. Form testable theories based on collected evidence and patterns.. Parameters: evidence, constraints?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM theorize tool accept?",
+    "input": "Tool: quantum.theorize",
+    "output": "The theorize tool (QUANTUM) accepts: evidence, constraints?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for theorize?",
+    "input": "Task: Hypothesis generation. Form testable theories based on collected evidence and patterns.",
+    "output": "Route to QUANTUM for theorize tasks. The quantum.theorize tool provides: Hypothesis generation. Form testable theories based on collected evidence and patterns.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM verify tool?",
+    "input": "MCP tool: quantum.verify",
+    "output": "Use verify when Solution validation. Test hypotheses against evidence and confirm or reject theories.. Parameters: hypothesis, evidence?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM verify tool accept?",
+    "input": "Tool: quantum.verify",
+    "output": "The verify tool (QUANTUM) accepts: hypothesis, evidence?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for verify?",
+    "input": "Task: Solution validation. Test hypotheses against evidence and confirm or reject theories.",
+    "output": "Route to QUANTUM for verify tasks. The quantum.verify tool provides: Solution validation. Test hypotheses against evidence and confirm or reject theories.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM close tool?",
+    "input": "MCP tool: quantum.close",
+    "output": "Use close when Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.. Parameters: investigation_id, format?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM close tool accept?",
+    "input": "Tool: quantum.close",
+    "output": "The close tool (QUANTUM) accepts: investigation_id, format?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for close?",
+    "input": "Task: Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.",
+    "output": "Route to QUANTUM for close tasks. The quantum.close tool provides: Deliverable generation. Create customer-facing outputs: RCA documents, JIRA updates, resolution summaries.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM quick tool?",
+    "input": "MCP tool: quantum.quick",
+    "output": "Use quick when Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.. Parameters: target, context?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM quick tool accept?",
+    "input": "Tool: quantum.quick",
+    "output": "The quick tool (QUANTUM) accepts: target, context?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for quick?",
+    "input": "Task: Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.",
+    "output": "Route to QUANTUM for quick tasks. The quantum.quick tool provides: Abbreviated investigation. Fast-path for simple cases that don't need full 8-phase protocol.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM research tool?",
+    "input": "MCP tool: quantum.research",
+    "output": "Use research when Web search + Helix + synthesis. Combined research from multiple knowledge sources.. Parameters: query, depth?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM research tool accept?",
+    "input": "Tool: quantum.research",
+    "output": "The research tool (QUANTUM) accepts: query, depth?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM quantum_helix tool?",
+    "input": "MCP tool: quantum.quantum_helix",
+    "output": "Use quantum_helix when Investigation-aware knowledge graph queries. Search helix entries with investigation context.. Parameters: query, investigation_id?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM quantum_helix tool accept?",
+    "input": "Tool: quantum.quantum_helix",
+    "output": "The quantum_helix tool (QUANTUM) accepts: query, investigation_id?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for quantum_helix?",
+    "input": "Task: Investigation-aware knowledge graph queries. Search helix entries with investigation context.",
+    "output": "Route to QUANTUM for quantum_helix tasks. The quantum.quantum_helix tool provides: Investigation-aware knowledge graph queries. Search helix entries with investigation context.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM discover tool?",
+    "input": "MCP tool: quantum.discover",
+    "output": "Use discover when Find tools by query. Search available tools matching a description or capability.. Parameters: query.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM discover tool accept?",
+    "input": "Tool: quantum.discover",
+    "output": "The discover tool (QUANTUM) accepts: query",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for discover?",
+    "input": "Task: Find tools by query. Search available tools matching a description or capability.",
+    "output": "Route to QUANTUM for discover tasks. The quantum.discover tool provides: Find tools by query. Search available tools matching a description or capability.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM list tool?",
+    "input": "MCP tool: quantum.list",
+    "output": "Use list when Show all available QUANTUM actions and their schemas.. Parameters: (none).",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM list tool accept?",
+    "input": "Tool: quantum.list",
+    "output": "The list tool (QUANTUM) accepts: (none)",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for list?",
+    "input": "Task: Show all available QUANTUM actions and their schemas.",
+    "output": "Route to QUANTUM for list tasks. The quantum.list tool provides: Show all available QUANTUM actions and their schemas.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "When should I use the QUANTUM workflow tool?",
+    "input": "MCP tool: quantum.workflow",
+    "output": "Use workflow when Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.. Parameters: template, params?.",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "What parameters does the QUANTUM workflow tool accept?",
+    "input": "Tool: quantum.workflow",
+    "output": "The workflow tool (QUANTUM) accepts: template, params?",
+    "source": "tool-schema"
+  },
+  {
+    "instruction": "Which AI sibling should handle a request for workflow?",
+    "input": "Task: Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.",
+    "output": "Route to QUANTUM for workflow tasks. The quantum.workflow tool provides: Run investigation workflow templates: phase1-parallel, pattern-enrichment, har-analysis, full-investigation, multi-product-cascade, evidence-validation, timeline-correlation.",
+    "source": "tool-schema"
+  }
+]

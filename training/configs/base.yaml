@@ -1,0 +1,82 @@
+# Base SFT configuration shared by both models
+# sovereign-forging-lion Phase 7
+
+# QLoRA configuration
+lora:
+  r: 16
+  alpha: 16
+  target_modules: "all-linear"
+  dropout: 0.0
+  bias: "none"
+  use_gradient_checkpointing: "unsloth"  # 60% less VRAM
+  random_state: 3407
+
+# Training hyperparameters
+training:
+  learning_rate: 2.0e-4
+  num_epochs: 2
+  per_device_train_batch_size: 8
+  gradient_accumulation_steps: 2
+  warmup_ratio: 0.05
+  lr_scheduler_type: "cosine"
+  optim: "adamw_8bit"
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+  max_seq_length: 4096
+  packing: true
+  fp16: false
+  bf16: true
+  logging_steps: 10
+  save_steps: 200
+  save_total_limit: 3
+  seed: 3407
+
+# Data paths (relative to LightArchitectsFoundationModel/)
+data:
+  domain_train: "training-data/train.json"
+  domain_val: "training-data/val.json"
+  domain_test: "training-data/test.json"
+  bible_verse_principle: "bible-data/output/verse-to-principle.json"
+  bible_dilemma: "bible-data/output/dilemma-to-wisdom.json"
+  bible_proverbs: "bible-data/output/proverbs-to-guidance.json"
+  bible_narrative: "bible-data/output/narrative-to-principle.json"
+  bible_alpaca: "training-data/bible-alpaca.json"
+  trace_alpaca: "training-data/traces-alpaca.json"
+
+# Stage 1: Biblical Foundation
+stage1:
+  name: "Biblical Foundation"
+  mix:
+    biblical: 0.70
+    domain: 0.15
+    general: 0.15
+  general_dataset: "Open-Orca/OpenOrca"
+  general_subset: null
+  general_max_samples: 2000
+
+# Stage 2: Domain Integration
+stage2:
+  name: "Domain Integration"
+  mix:
+    domain: 0.50
+    general: 0.20
+    biblical_replay: 0.15
+    trace_patterns: 0.15
+  general_dataset: "Open-Orca/OpenOrca"
+  general_subset: null
+  general_max_samples: 1500
+
+# Output paths
+output:
+  base_dir: "checkpoints"
+  stage1_suffix: "stage1-biblical"
+  stage2_suffix: "stage2-domain"
+  merged_suffix: "merged-16bit"
+  gguf_suffix: "gguf"
+
+# Monitoring
+monitoring:
+  wandb_project: "light-architects-foundation-model"
+  wandb_entity: null  # set via WANDB_ENTITY env var
+  report_to: "wandb"
+  log_model: false

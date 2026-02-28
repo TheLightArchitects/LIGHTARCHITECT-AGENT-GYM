@@ -1,0 +1,32 @@
+# SFT/DPO/GRPO Training Pipeline — Light Architects Foundation Model
+# Install: pip install -r requirements.txt
+# GPU: RunPod A100 40GB recommended
+
+# Core ML
+torch>=2.4.0
+transformers>=4.45.0
+datasets>=3.0.0
+accelerate>=1.0.0
+peft>=0.13.0
+trl>=0.12.0
+bitsandbytes>=0.44.0
+
+# Unsloth (install separately — has custom torch deps)
+# pip install unsloth
+# See: https://docs.unsloth.ai/get-started/installation
+
+# Data handling
+pyyaml>=6.0
+jsonlines>=4.0.0
+
+# Monitoring
+wandb>=0.18.0
+tensorboard>=2.18.0
+
+# Export
+# llama-cpp-python (for GGUF conversion, install separately)
+# pip install llama-cpp-python
+
+# Utilities
+typer>=0.12.0
+rich>=13.9.0

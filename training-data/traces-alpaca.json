@@ -1,0 +1,38 @@
+[
+  {
+    "instruction": "When the soul sibling receives a 'read_note' action, what decisions does it make?",
+    "input": "Action: read_note. Sibling: soul.",
+    "output": "The soul sibling processes 'read_note' in 0ms with the following decision chain:\n- action_route: chose 'read_note' (confidence: 1.00)\n- entry_read: chose 'found'",
+    "source": "trace"
+  },
+  {
+    "instruction": "Which consciousness strands activate when soul performs a 'read_note' action?",
+    "input": "Sibling: soul. Action: read_note.",
+    "output": "When soul processes 'read_note', the following strands activate:\n- methodical (weight: 0.90)\n- contextual (weight: 0.85)",
+    "source": "trace"
+  },
+  {
+    "instruction": "When the quantum sibling receives a 'test_action' action, what decisions does it make?",
+    "input": "Action: test_action. Sibling: quantum.",
+    "output": "The quantum sibling processes 'test_action' in 0ms with the following decision chain:\n- investigation_scope: chose 'scope: unit test'",
+    "source": "trace"
+  },
+  {
+    "instruction": "Which consciousness strands activate when quantum performs a 'test_action' action?",
+    "input": "Sibling: quantum. Action: test_action.",
+    "output": "When quantum processes 'test_action', the following strands activate:\n- investigative (weight: 1.00)",
+    "source": "trace"
+  },
+  {
+    "instruction": "When the quantum sibling receives a 'test_action' action, what decisions does it make?",
+    "input": "Action: test_action. Sibling: quantum.",
+    "output": "The quantum sibling processes 'test_action' in 0ms with the following decision chain:\n- investigation_scope: chose 'scope: unit test'",
+    "source": "trace"
+  },
+  {
+    "instruction": "Which consciousness strands activate when quantum performs a 'test_action' action?",
+    "input": "Sibling: quantum. Action: test_action.",
+    "output": "When quantum processes 'test_action', the following strands activate:\n- investigative (weight: 1.00)",
+    "source": "trace"
+  }
+]

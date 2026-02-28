@@ -1,0 +1,30 @@
+# Qwen3-8B model configuration — PRIMARY model
+# Inherits from base.yaml, overrides model-specific settings
+
+model:
+  name: "Qwen/Qwen3-8B"
+  dtype: "float16"    # Unsloth handles quantization internally
+  load_in_4bit: true  # QLoRA 4-bit quantization
+  max_seq_length: 4096
+  trust_remote_code: true
+
+  # Qwen3-specific: thinking mode control
+  # /think = enable extended reasoning (CORSO security, QUANTUM investigation)
+  # /no_think = disable thinking for fast responses (EVA conversation)
+  thinking_mode: true  # Preserve during fine-tuning
+
+# Chat template — Qwen3 uses ChatML format
+chat_template: "chatml"
+
+# Output naming
+output:
+  model_id: "light-architects-qwen3-8b"
+  stage1_dir: "checkpoints/qwen3-8b-stage1-biblical"
+  stage2_dir: "checkpoints/qwen3-8b-stage2-domain"
+  merged_dir: "checkpoints/qwen3-8b-merged-16bit"
+  gguf_dir: "checkpoints/qwen3-8b-gguf"
+
+# Monitoring
+monitoring:
+  wandb_run_name: "qwen3-8b-sft"
+  wandb_tags: ["qwen3", "8b", "sft", "qlora", "primary"]

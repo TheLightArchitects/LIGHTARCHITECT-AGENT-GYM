@@ -1,0 +1,25 @@
+# Llama 3.1 8B Instruct model configuration — COMPARATOR model
+# Inherits from base.yaml, overrides model-specific settings
+
+model:
+  name: "meta-llama/Llama-3.1-8B-Instruct"
+  dtype: "float16"
+  load_in_4bit: true
+  max_seq_length: 4096
+  trust_remote_code: false
+
+# Chat template — Llama 3.1 uses its own template
+chat_template: "llama-3.1"
+
+# Output naming
+output:
+  model_id: "light-architects-llama31-8b"
+  stage1_dir: "checkpoints/llama31-8b-stage1-biblical"
+  stage2_dir: "checkpoints/llama31-8b-stage2-domain"
+  merged_dir: "checkpoints/llama31-8b-merged-16bit"
+  gguf_dir: "checkpoints/llama31-8b-gguf"
+
+# Monitoring
+monitoring:
+  wandb_run_name: "llama31-8b-sft"
+  wandb_tags: ["llama31", "8b", "sft", "qlora", "comparator"]

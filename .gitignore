@@ -21,5 +21,15 @@ build/
 .coverage
 htmlcov/
 
+# Rust
+target/
+
+# Large binary files
+*.mp3
+*.wav
+*.bin
+*.gguf
+checkpoints/
+
 # OS
 .DS_Store
