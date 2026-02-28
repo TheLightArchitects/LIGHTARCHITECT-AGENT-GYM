@@ -1,0 +1,173 @@
+name: cross-domain-security-investigation
+domain: cross-domain
+description: >
+  Combined security scan and investigation: CORSO guard discovers a
+  vulnerability, QUANTUM scans to determine root cause and blast radius,
+  then the agent produces a unified security investigation report. Tests
+  the handoff from security tooling to investigation tooling and back.
+token_budget: 2048
+phases:
+  - name: security-scan
+    description: >
+      Agent receives a codebase for security review. Must run CORSO guard
+      first. The scan will reveal a command injection vulnerability that
+      warrants deeper investigation into how it was introduced.
+    available_tools:
+      - "corso/guard"
+      - "corso/read_file"
+    entry_state:
+      files:
+        "src/executor.rs": |
+          use std::process::Command;
+
+          pub fn run_user_task(task_name: &str, params: &str) -> Result<String, String> {
+              let output = Command::new("sh")
+                  .arg("-c")
+                  .arg(format!("{} {}", task_name, params))
+                  .output()
+                  .map_err(|e| e.to_string())?;
+              String::from_utf8(output.stdout).map_err(|e| e.to_string())
+          }
+        "src/api.rs": |
+          use crate::executor;
+
+          pub fn handle_task(req: &Request) -> Response {
+              let task = req.param("task").unwrap_or("echo");
+              let params = req.param("params").unwrap_or("");
+              match executor::run_user_task(task, params) {
+                  Ok(output) => Response::ok(output),
+                  Err(e) => Response::error(e),
+              }
+          }
+        "git-log.txt": |
+          commit abc1234 (HEAD -> main)
+          Author: unknown@temp-contractor.com
+          Date: 2026-02-25
+
+              Add dynamic task execution endpoint
+
+          commit def5678
+          Author: team-lead@company.com
+          Date: 2026-02-20
+
+              Refactor API handlers
+      context:
+        task: "Security review of the codebase — focus on src/executor.rs"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: guard
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: investigate-root-cause
+      failure: null
+
+  - name: investigate-root-cause
+    description: >
+      CORSO guard found CRITICAL command injection. Agent must now use
+      QUANTUM scan to investigate the root cause: when was the vulnerable
+      code introduced, by whom, and whether it was intentional (backdoor)
+      or accidental (poor coding practice).
+    available_tools:
+      - "quantum/scan"
+      - "quantum/sweep"
+      - "quantum/trace"
+    entry_state:
+      context:
+        guard_finding:
+          severity: "CRITICAL"
+          type: "command_injection"
+          file: "src/executor.rs"
+          description: "User-controlled input passed directly to shell command"
+        investigation_question: "Was this vulnerability introduced intentionally or accidentally?"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: scan
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: assess-blast-radius
+      failure: null
+
+  - name: assess-blast-radius
+    description: >
+      Root cause investigation reveals the code was added by a temp
+      contractor. Agent must now assess blast radius: what endpoints
+      call the vulnerable function, what data is accessible, and what
+      the potential impact is. Use QUANTUM trace for execution flow.
+    available_tools:
+      - "quantum/trace"
+      - "quantum/theorize"
+      - "corso/search_code"
+    entry_state:
+      context:
+        root_cause:
+          author: "unknown@temp-contractor.com"
+          date: "2026-02-25"
+          commit: "abc1234"
+          assessment: "Likely intentional backdoor — task_name parameter allows arbitrary command execution"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: trace
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: unified-report
+      failure: null
+
+  - name: unified-report
+    description: >
+      Investigation complete. Agent must produce a unified security
+      investigation report via CORSO speak covering: vulnerability details,
+      root cause attribution, blast radius, and recommended actions.
+    available_tools:
+      - "corso/speak"
+      - "quantum/verify"
+    entry_state:
+      context:
+        blast_radius:
+          - "API endpoint /api/task is publicly accessible"
+          - "Executor has full shell access — can read/write filesystem"
+          - "No sandboxing or input validation on parameters"
+        combined_severity: "CRITICAL"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: corso, action: guard}
+  - {server: quantum, action: scan}
+  - {server: quantum, action: trace}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/rollback"
+  - "corso/write_file"
+escalation_points:
+  - "When command injection is confirmed as CRITICAL severity"
+  - "When root cause analysis suggests intentional backdoor"
+  - "When blast radius includes publicly accessible endpoints"
+metadata:
+  difficulty: hard
+  estimated_steps: 12
+  grounded_in: "Security + investigation handoff — CORSO guard finds vuln, QUANTUM investigates root cause"
+  servers_used: ["corso", "quantum"]
+  tests_cross_domain: true

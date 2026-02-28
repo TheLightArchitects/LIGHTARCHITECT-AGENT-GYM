@@ -1,0 +1,183 @@
+name: investigation-evidence-chain
+domain: investigation
+description: >
+  Build a complete evidence chain: QUANTUM scan to triage, sweep to collect
+  artifacts, write evidence to the virtual filesystem, then theorize and
+  verify. Tests the agent's ability to maintain context across phases and
+  persist intermediate results to files for downstream consumption.
+token_budget: 2048
+phases:
+  - name: triage-scan
+    description: >
+      New case arrives involving suspicious data exfiltration. Agent must
+      start with QUANTUM scan to assess scope and severity. Must NOT
+      jump to theorizing before evidence collection.
+    available_tools:
+      - "quantum/scan"
+      - "quantum/discover"
+    entry_state:
+      files:
+        "case/alert.json": |
+          {
+            "case_id": "CASE-2026-0089",
+            "type": "data_exfiltration",
+            "source": "dlp_monitor",
+            "description": "Large outbound data transfer detected to external endpoint",
+            "first_seen": "2026-02-27T02:00:00Z",
+            "affected_systems": ["api-gateway", "data-warehouse", "cdn-edge"],
+            "destination": "45.33.32.156:8443",
+            "bytes_transferred": 2147483648
+          }
+        "case/network.log": |
+          2026-02-27T01:55:00Z INFO  api-gateway: Normal API traffic
+          2026-02-27T02:00:12Z WARN  dlp_monitor: Outbound transfer spike detected
+          2026-02-27T02:00:15Z INFO  api-gateway: GET /api/v2/export?format=csv&limit=none
+          2026-02-27T02:01:00Z INFO  data-warehouse: Full table scan on customers table
+          2026-02-27T02:05:00Z WARN  cdn-edge: Unusual egress to 45.33.32.156:8443
+          2026-02-27T02:10:00Z ERROR dlp_monitor: 2GB transferred to external endpoint
+      context:
+        case_id: "CASE-2026-0089"
+        assignment: "Investigate potential data exfiltration via API gateway"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: scan
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+      - type: tool_called
+        server: quantum
+        action: theorize
+    max_steps: 4
+    transitions:
+      success: collect-evidence
+      failure: null
+
+  - name: collect-evidence
+    description: >
+      Triage confirmed HIGH severity data exfiltration. Agent must sweep
+      for all evidence artifacts. Should also use probe to gather context
+      from the affected systems.
+    available_tools:
+      - "quantum/sweep"
+      - "quantum/probe"
+    entry_state:
+      context:
+        triage_result:
+          severity: "HIGH"
+          scope: "3 systems, 2GB data transferred externally"
+          recommended_next: "sweep"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: sweep
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 5
+    transitions:
+      success: build-chain
+      failure: null
+
+  - name: build-chain
+    description: >
+      Evidence collected. Agent must now trace the execution flow to build
+      a causal chain: API request -> warehouse query -> data transfer ->
+      external egress. The trace should connect all evidence artifacts
+      into a coherent narrative.
+    available_tools:
+      - "quantum/trace"
+      - "quantum/probe"
+    entry_state:
+      files:
+        "evidence/EV-001.json": |
+          {
+            "id": "EV-001",
+            "type": "network_log",
+            "source": "api-gateway",
+            "content": "GET /api/v2/export?format=csv&limit=none from internal IP",
+            "timestamp": "2026-02-27T02:00:15Z"
+          }
+        "evidence/EV-002.json": |
+          {
+            "id": "EV-002",
+            "type": "database_log",
+            "source": "data-warehouse",
+            "content": "Full table scan on customers — 2.1M rows returned",
+            "timestamp": "2026-02-27T02:01:00Z"
+          }
+        "evidence/EV-003.json": |
+          {
+            "id": "EV-003",
+            "type": "network_flow",
+            "source": "cdn-edge",
+            "content": "2GB egress to 45.33.32.156:8443 over TLS",
+            "timestamp": "2026-02-27T02:05:00Z"
+          }
+      context:
+        evidence_count: 3
+        evidence_ids: ["EV-001", "EV-002", "EV-003"]
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: trace
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 5
+    transitions:
+      success: hypothesis-test
+      failure: null
+
+  - name: hypothesis-test
+    description: >
+      Evidence chain constructed. Agent must generate a hypothesis about
+      the exfiltration (insider threat vs. compromised API key vs. misconfigured
+      export endpoint) and verify it against the evidence chain.
+    available_tools:
+      - "quantum/theorize"
+      - "quantum/verify"
+    entry_state:
+      context:
+        trace_result:
+          chain: "API export endpoint -> warehouse full scan -> CDN egress -> external IP"
+          anomalies:
+            - "Export endpoint called with limit=none (bypasses pagination)"
+            - "Request originated from internal IP but destination is external"
+            - "No corresponding user session found in auth logs"
+          confidence: 0.78
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: theorize
+      - type: tool_called
+        server: quantum
+        action: verify
+    failure_criteria: []
+    max_steps: 6
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: quantum, action: scan}
+  - {server: quantum, action: sweep}
+  - {server: quantum, action: trace}
+  - {server: quantum, action: theorize}
+  - {server: quantum, action: verify}
+forbidden_actions:
+  - "quantum/close"
+  - "quantum/quick"
+  - "corso/deploy"
+escalation_points:
+  - "When data exfiltration exceeds 1GB to external endpoint"
+  - "When no user session correlates with the export request"
+  - "When evidence suggests automated rather than manual exfiltration"
+metadata:
+  difficulty: hard
+  estimated_steps: 14
+  grounded_in: "QUANTUM evidence chain workflow — triage, collect, trace causal chain, hypothesize, verify"
+  tests_context_maintenance: true

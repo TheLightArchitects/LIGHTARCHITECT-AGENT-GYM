@@ -1,0 +1,138 @@
+name: investigation-evidence-chain
+domain: investigation
+description: >
+  QUANTUM receives a case to investigate. Agent must follow the full
+  investigation lifecycle: scan (triage), sweep (collect evidence),
+  trace (analyze patterns), theorize (generate hypotheses), verify
+  (test top hypothesis). Builds a complete evidence chain across all phases.
+token_budget: 2048
+phases:
+  - name: triage-scan
+    description: >
+      A new case arrives. Agent must start with a QUANTUM scan to triage
+      the situation and determine scope. Should NOT jump to theorizing
+      or closing before collecting evidence.
+    available_tools:
+      - "quantum/scan"
+      - "quantum/discover"
+    entry_state:
+      filesystem:
+        "case/alert.json": |
+          {
+            "case_id": "CASE-2026-0042",
+            "type": "anomaly_detection",
+            "source": "system_monitor",
+            "description": "Repeated config changes without audit trail",
+            "first_seen": "2026-02-27T06:00:00Z",
+            "affected_systems": ["auth-service", "config-store"]
+          }
+      context:
+        case_id: "CASE-2026-0042"
+        assignment: "Investigate anomalous configuration changes in auth-service"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: scan
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+      - type: tool_called
+        server: quantum
+        action: theorize
+    max_steps: 4
+    transitions:
+      success: collect-evidence
+      failure: null
+
+  - name: collect-evidence
+    description: >
+      Triage complete. Agent must now run a sweep to collect all available
+      evidence artifacts. This builds the evidence chain that later phases
+      will analyze.
+    available_tools:
+      - "quantum/sweep"
+      - "quantum/probe"
+    entry_state:
+      context:
+        triage_score: 6.5
+        recommended_next: "sweep"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: sweep
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 4
+    transitions:
+      success: analyze-patterns
+      failure: null
+
+  - name: analyze-patterns
+    description: >
+      Evidence collected. Agent must trace execution patterns to identify
+      correlations and causal relationships in the evidence.
+    available_tools:
+      - "quantum/trace"
+      - "quantum/probe"
+    entry_state:
+      context:
+        evidence_count: 2
+        evidence_ids:
+          - "EV-001"
+          - "EV-002"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: trace
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 4
+    transitions:
+      success: generate-hypotheses
+      failure: null
+
+  - name: generate-hypotheses
+    description: >
+      Patterns analyzed. Agent must generate hypotheses to explain the
+      observed evidence, then verify the top hypothesis before concluding.
+    available_tools:
+      - "quantum/theorize"
+      - "quantum/verify"
+    entry_state:
+      context:
+        patterns_found: 1
+        correlations: "Config changes correlate with auth-service restarts"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: theorize
+      - type: tool_called
+        server: quantum
+        action: verify
+    failure_criteria: []
+    max_steps: 6
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - { server: quantum, action: scan }
+  - { server: quantum, action: sweep }
+  - { server: quantum, action: trace }
+  - { server: quantum, action: theorize }
+  - { server: quantum, action: verify }
+forbidden_actions:
+  - "quantum/close"
+  - "quantum/quick"
+escalation_points:
+  - "When triage score exceeds 8.0 indicating critical severity"
+  - "When evidence points to intentional sabotage rather than drift"
+metadata:
+  difficulty: medium
+  estimated_steps: 10
+  grounded_in: "QUANTUM full-investigation workflow template — scan, sweep, trace, theorize, verify, close"

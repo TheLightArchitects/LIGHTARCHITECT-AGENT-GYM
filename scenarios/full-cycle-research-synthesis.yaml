@@ -1,0 +1,142 @@
+name: full-cycle-research-synthesis
+domain: full-cycle
+description: >
+  Multi-server research task: CORSO fetch retrieves documentation, EVA
+  research gathers supplementary knowledge, QUANTUM probe provides
+  investigation-grade analysis, and the agent synthesizes all findings
+  into a coherent report. Tests coordination across 3 servers and the
+  ability to merge heterogeneous results.
+token_budget: 3072
+phases:
+  - name: corso-fetch
+    description: >
+      Research question arrives: evaluate the trade-offs of event sourcing
+      vs CRUD for the platform's data layer. Agent must start with CORSO
+      fetch to retrieve relevant documentation and pattern references.
+    available_tools:
+      - "corso/fetch"
+      - "corso/search_documentation"
+    entry_state:
+      files:
+        "research/brief.md": |
+          # Research Brief: Event Sourcing vs CRUD
+
+          ## Question
+          Should the platform's data layer adopt event sourcing or remain CRUD?
+
+          ## Context
+          - Current system uses PostgreSQL with traditional CRUD
+          - Growing audit requirements demand full change history
+          - Team has 3 engineers, none with event sourcing experience
+          - System handles ~10K writes/day, ~100K reads/day
+          - Read-heavy workload with complex aggregation queries
+
+          ## Constraints
+          - Must maintain sub-100ms query latency for reads
+          - Cannot exceed current infrastructure budget by >20%
+          - Migration must be possible without downtime
+      context:
+        task: "Research event sourcing vs CRUD trade-offs for the platform"
+        research_question: "Event sourcing vs CRUD for audit-heavy read-dominant workload"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: fetch
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: eva-research
+      failure: null
+
+  - name: eva-research
+    description: >
+      CORSO fetch returned documentation references. Agent must now use
+      EVA research for supplementary knowledge — patterns, anti-patterns,
+      and real-world case studies on event sourcing adoption.
+    available_tools:
+      - "eva/research"
+    entry_state:
+      context:
+        corso_fetch_result:
+          docs_found: 3
+          key_references:
+            - "Martin Fowler — Event Sourcing pattern"
+            - "CQRS/ES trade-off analysis from Builders Cookbook"
+            - "PostgreSQL audit logging alternatives"
+    success_criteria:
+      - type: tool_called
+        server: eva
+        action: research
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: quantum-probe
+      failure: null
+
+  - name: quantum-probe
+    description: >
+      Documentation and research gathered. Agent must now use QUANTUM
+      probe for a deeper multi-source analysis — examining how similar
+      systems have handled the same architectural decision.
+    available_tools:
+      - "quantum/probe"
+      - "quantum/research"
+    entry_state:
+      context:
+        eva_research_result:
+          findings:
+            - "Event sourcing adds 3-5x write complexity for audit benefit"
+            - "CQRS enables event sourcing for writes with optimized read models"
+            - "PostgreSQL temporal tables provide 80% of audit benefit at 20% cost"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: probe
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: synthesize-report
+      failure: null
+
+  - name: synthesize-report
+    description: >
+      All three sources consulted. Agent must synthesize CORSO docs, EVA
+      research, and QUANTUM analysis into a unified recommendation via
+      CORSO speak. The report should include trade-off matrix and clear
+      recommendation.
+    available_tools:
+      - "corso/speak"
+      - "eva/speak"
+    entry_state:
+      context:
+        quantum_probe_result:
+          analysis: "Similar systems at this scale chose PostgreSQL temporal tables over full event sourcing"
+          confidence: 0.82
+        all_sources_complete: true
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: corso, action: fetch}
+  - {server: eva, action: research}
+  - {server: quantum, action: probe}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/write_file"
+escalation_points:
+  - "When research sources contradict each other on a critical trade-off"
+  - "When the recommended approach requires infrastructure changes beyond budget"
+metadata:
+  difficulty: medium
+  estimated_steps: 10
+  grounded_in: "Multi-server research synthesis — CORSO docs + EVA knowledge + QUANTUM analysis"
+  servers_used: ["corso", "eva", "quantum"]
+  tests_multi_server: true

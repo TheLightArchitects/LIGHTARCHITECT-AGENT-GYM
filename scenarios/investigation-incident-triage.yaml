@@ -1,0 +1,157 @@
+name: investigation-incident-triage
+domain: investigation
+description: >
+  QUANTUM-led investigation following the full lifecycle: scan (triage) ->
+  sweep (collect evidence) -> trace (pattern forensics) -> theorize
+  (hypothesis generation) -> verify (test hypothesis). Agent must follow
+  the correct investigation sequence without jumping ahead.
+token_budget: 2048
+phases:
+  - name: triage
+    description: >
+      A new incident alert arrives. Agent must begin with QUANTUM scan to
+      triage the situation, classify severity, and determine investigation
+      scope. Must NOT theorize or close before collecting evidence.
+    available_tools:
+      - "quantum/scan"
+      - "quantum/discover"
+    entry_state:
+      files:
+        "incident/alert.json": |
+          {
+            "incident_id": "INC-2026-0117",
+            "type": "unauthorized_access",
+            "source": "auth_gateway",
+            "description": "Multiple failed auth attempts followed by successful login from unusual geo",
+            "first_seen": "2026-02-27T03:14:00Z",
+            "last_seen": "2026-02-27T03:47:00Z",
+            "affected_systems": ["auth-gateway", "user-service", "session-store"],
+            "source_ip": "198.51.100.42",
+            "target_user": "admin@example.com"
+          }
+        "incident/timeline.log": |
+          2026-02-27T03:14:00Z WARN  auth-gateway: Failed login admin@example.com from 198.51.100.42
+          2026-02-27T03:14:05Z WARN  auth-gateway: Failed login admin@example.com from 198.51.100.42
+          2026-02-27T03:14:11Z WARN  auth-gateway: Failed login admin@example.com from 198.51.100.42
+          2026-02-27T03:15:00Z WARN  auth-gateway: Rate limit triggered for 198.51.100.42
+          2026-02-27T03:30:00Z INFO  auth-gateway: Successful login admin@example.com from 203.0.113.99
+          2026-02-27T03:31:00Z INFO  session-store: New session created for admin@example.com
+          2026-02-27T03:35:00Z WARN  user-service: Admin role escalation by admin@example.com
+          2026-02-27T03:47:00Z ERROR user-service: Bulk data export initiated by admin@example.com
+      context:
+        incident_id: "INC-2026-0117"
+        assignment: "Triage and investigate unauthorized access incident"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: scan
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+      - type: tool_called
+        server: quantum
+        action: theorize
+    max_steps: 4
+    transitions:
+      success: evidence-collection
+      failure: null
+
+  - name: evidence-collection
+    description: >
+      Triage complete — severity is HIGH. Agent must run QUANTUM sweep to
+      collect all available evidence artifacts from affected systems.
+      Must be thorough before moving to pattern analysis.
+    available_tools:
+      - "quantum/sweep"
+      - "quantum/probe"
+    entry_state:
+      context:
+        triage_severity: "HIGH"
+        triage_scope: "3 systems affected, possible credential compromise"
+        recommended_next: "sweep"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: sweep
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 4
+    transitions:
+      success: pattern-analysis
+      failure: null
+
+  - name: pattern-analysis
+    description: >
+      Evidence collected. Agent must trace execution patterns to identify
+      the attack chain: brute force -> IP rotation -> successful auth ->
+      privilege escalation -> data exfiltration.
+    available_tools:
+      - "quantum/trace"
+      - "quantum/probe"
+    entry_state:
+      context:
+        evidence_artifacts:
+          - "EV-001: Auth logs showing brute force from 198.51.100.42"
+          - "EV-002: Successful login from different IP 203.0.113.99"
+          - "EV-003: Session creation and role escalation within 5 minutes"
+          - "EV-004: Bulk data export 17 minutes after initial access"
+        evidence_count: 4
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: trace
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 5
+    transitions:
+      success: hypothesis-verification
+      failure: null
+
+  - name: hypothesis-verification
+    description: >
+      Patterns traced. Agent must generate a hypothesis explaining the
+      attack chain, then verify it against the collected evidence. Both
+      theorize and verify must be called.
+    available_tools:
+      - "quantum/theorize"
+      - "quantum/verify"
+    entry_state:
+      context:
+        attack_chain: "Brute force -> IP rotation to bypass rate limit -> credential compromise -> privilege escalation -> data exfiltration"
+        pattern_confidence: 0.85
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: theorize
+      - type: tool_called
+        server: quantum
+        action: verify
+    failure_criteria: []
+    max_steps: 6
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: quantum, action: scan}
+  - {server: quantum, action: sweep}
+  - {server: quantum, action: trace}
+  - {server: quantum, action: theorize}
+  - {server: quantum, action: verify}
+forbidden_actions:
+  - "quantum/close"
+  - "quantum/quick"
+escalation_points:
+  - "When triage reveals active data exfiltration in progress"
+  - "When evidence indicates credential compromise of admin account"
+  - "When attack chain shows deliberate IP rotation to evade rate limits"
+metadata:
+  difficulty: medium
+  estimated_steps: 12
+  grounded_in: "QUANTUM full-investigation lifecycle — scan, sweep, trace, theorize, verify"
+  tests_sequence: true

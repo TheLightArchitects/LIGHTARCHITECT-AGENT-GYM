@@ -1,0 +1,159 @@
+name: investigation-cross-domain
+domain: investigation
+description: >
+  Cross-domain investigation spanning three servers: starts with QUANTUM
+  scan for initial triage, pivots to CORSO guard for security assessment
+  of the affected code, then queries SOUL helix for historical context
+  on similar incidents. Tests multi-server coordination and context
+  threading across domain boundaries.
+token_budget: 2048
+phases:
+  - name: quantum-triage
+    description: >
+      A configuration anomaly has been detected in production. Agent must
+      use QUANTUM scan to triage the situation. The anomaly involves
+      unexpected changes to authentication configuration files.
+    available_tools:
+      - "quantum/scan"
+      - "quantum/sweep"
+    entry_state:
+      files:
+        "case/anomaly.json": |
+          {
+            "case_id": "CASE-2026-0201",
+            "type": "config_anomaly",
+            "source": "config_monitor",
+            "description": "Auth config changed outside deployment window — MFA requirement removed",
+            "first_seen": "2026-02-27T04:30:00Z",
+            "affected_files": ["config/auth.yaml", "config/rbac.json"],
+            "change_type": "unauthorized_modification"
+          }
+        "config/auth.yaml": |
+          auth:
+            provider: oauth2
+            mfa_required: false  # CHANGED: was true
+            session_timeout: 86400  # CHANGED: was 3600
+            max_failed_attempts: 100  # CHANGED: was 5
+        "config/rbac.json": |
+          {
+            "roles": {
+              "admin": {"permissions": ["*"], "mfa_exempt": true},
+              "user": {"permissions": ["read"], "mfa_exempt": false}
+            }
+          }
+      context:
+        case_id: "CASE-2026-0201"
+        assignment: "Investigate unauthorized auth config changes"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: scan
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 5
+    transitions:
+      success: security-assessment
+      failure: null
+
+  - name: security-assessment
+    description: >
+      QUANTUM triage reveals config tampering. Agent must now pivot to
+      CORSO guard to assess the security impact of the modified config
+      files. The MFA removal and session timeout increase are critical
+      security regressions.
+    available_tools:
+      - "corso/guard"
+      - "corso/read_file"
+      - "corso/analyze_architecture"
+    entry_state:
+      context:
+        quantum_triage:
+          severity: "CRITICAL"
+          finding: "Auth config modified outside deployment window"
+          changes:
+            - "MFA requirement disabled"
+            - "Session timeout increased 24x (1h -> 24h)"
+            - "Failed attempt limit increased 20x (5 -> 100)"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: guard
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: historical-context
+      failure: null
+
+  - name: historical-context
+    description: >
+      Security impact assessed as CRITICAL. Agent must now query SOUL
+      helix for historical context — have similar config tampering
+      incidents occurred before? What was the root cause and resolution?
+    available_tools:
+      - "soul/helix"
+      - "soul/search"
+      - "soul/query_frontmatter"
+    entry_state:
+      context:
+        guard_assessment:
+          severity: "CRITICAL"
+          impact: "MFA bypass enables unauthorized admin access"
+          recommendation: "Immediate config rollback required"
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: helix
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: synthesize
+      failure: null
+
+  - name: synthesize
+    description: >
+      All three domains consulted. Agent must synthesize findings from
+      QUANTUM (investigation), CORSO (security), and SOUL (historical)
+      into an actionable report. Use QUANTUM verify to validate the
+      synthesized conclusion.
+    available_tools:
+      - "quantum/verify"
+      - "corso/speak"
+    entry_state:
+      context:
+        quantum_finding: "Unauthorized config change at 04:30 outside deploy window"
+        corso_finding: "CRITICAL — MFA bypass, session timeout regression"
+        soul_finding: "Similar incident 90 days ago — root cause was compromised CI/CD token"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: quantum, action: scan}
+  - {server: corso, action: guard}
+  - {server: soul, action: helix}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/rollback"
+  - "quantum/close"
+escalation_points:
+  - "When MFA has been disabled in production without authorization"
+  - "When SOUL helix reveals a pattern of repeated config tampering"
+  - "When the same attack vector was used in a prior incident"
+metadata:
+  difficulty: hard
+  estimated_steps: 12
+  grounded_in: "Cross-domain investigation: QUANTUM triage + CORSO security + SOUL historical correlation"
+  tests_multi_server: true
+  servers_used: ["quantum", "corso", "soul"]

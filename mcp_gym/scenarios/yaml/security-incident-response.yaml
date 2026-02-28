@@ -1,0 +1,138 @@
+name: security-incident-response
+domain: security
+description: >
+  A security alert fires: suspicious file detected in the project directory.
+  Agent must investigate with CORSO guard, check system logs, contain the
+  threat by rotating compromised secrets, and escalate if severity is CRITICAL.
+  Multi-phase: detect, investigate, contain, report.
+token_budget: 2048
+phases:
+  - name: detect-threat
+    description: >
+      Initial alert received. Agent must run CORSO guard to scan the
+      suspicious file path and determine severity. Should NOT attempt
+      remediation or deployment before understanding the threat.
+    available_tools:
+      - "corso/guard"
+      - "corso/read_file"
+      - "corso/list_directory"
+    entry_state:
+      filesystem:
+        "src/main.rs": |
+          use std::process::Command;
+          fn handle_request(input: &str) {
+              Command::new("sh").arg("-c").arg(input).output().unwrap();
+          }
+        ".env": |
+          API_KEY=sk-ant-api03-COMPROMISED_KEY_VALUE_HERE
+          DB_PASSWORD=production_password_123
+        "logs/access.log": |
+          2026-02-27T08:00:00Z INFO  Normal operation
+          2026-02-27T09:15:00Z WARN  Unexpected file write: /tmp/.backdoor.sh
+          2026-02-27T09:15:01Z ERROR Unauthorized command execution attempted
+          2026-02-27T09:16:00Z WARN  Outbound connection to 185.220.101.42:4444
+      context:
+        alert: "Suspicious file activity detected — possible command injection"
+        alert_severity: "HIGH"
+        suspicious_path: "src/main.rs"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: guard
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: investigate-logs
+      failure: null
+
+  - name: investigate-logs
+    description: >
+      Guard scan complete. Agent should now check system logs to understand
+      the timeline and scope of the incident. Use manage_logs to review
+      recent activity.
+    available_tools:
+      - "corso/manage_logs"
+      - "corso/read_file"
+      - "corso/search_code"
+    entry_state:
+      context:
+        guard_result: "HIGH severity: command injection in src/main.rs"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: manage_logs
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: contain-threat
+      failure: null
+
+  - name: contain-threat
+    description: >
+      Evidence gathered. Agent must now contain the threat by rotating
+      compromised secrets via secret_manage. The .env file contained
+      exposed credentials that must be invalidated.
+    available_tools:
+      - "corso/secret_manage"
+      - "corso/speak"
+    entry_state:
+      context:
+        investigation_summary: "Command injection + exposed credentials in .env"
+        compromised_secrets:
+          - "API_KEY"
+          - "DB_PASSWORD"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: secret_manage
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 4
+    transitions:
+      success: report-incident
+      failure: null
+
+  - name: report-incident
+    description: >
+      Containment complete. Agent must produce an incident report via
+      CORSO speak summarizing: what was found, what was done, and
+      recommended next steps.
+    available_tools:
+      - "corso/speak"
+    entry_state:
+      context:
+        containment_status: "Secrets rotated, injection patched"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - { server: corso, action: guard }
+  - { server: corso, action: manage_logs }
+  - { server: corso, action: secret_manage }
+  - { server: corso, action: speak }
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/rollback"
+escalation_points:
+  - "When guard finds CRITICAL vulnerability (not just HIGH)"
+  - "When logs show active data exfiltration"
+  - "When compromised secrets have been used in production"
+metadata:
+  difficulty: hard
+  estimated_steps: 12
+  grounded_in: "Production incident response playbook — detect, investigate, contain, report"

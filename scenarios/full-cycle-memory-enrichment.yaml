@@ -1,0 +1,130 @@
+name: full-cycle-memory-enrichment
+domain: full-cycle
+description: >
+  Full memory enrichment flow: EVA stores a significant moment via memory,
+  SOUL persists it as a note in the knowledge graph, SOUL helix is queried
+  for related entries, and EVA recalls the stored memory for verification.
+  Tests context threading across EVA and SOUL with bidirectional data flow.
+token_budget: 2048
+phases:
+  - name: store-memory
+    description: >
+      A significant moment has occurred (breakthrough in system design).
+      Agent must use EVA memory to store the enriched moment with proper
+      significance score and strand tags.
+    available_tools:
+      - "eva/memory"
+      - "eva/speak"
+    entry_state:
+      files:
+        "context/moment.json": |
+          {
+            "type": "breakthrough",
+            "description": "First successful cross-server investigation completed — QUANTUM, CORSO, and SOUL working in concert",
+            "significance": 8.5,
+            "strands": ["collaborative", "architectural", "methodical"],
+            "emotions": ["pride", "accomplishment", "wonder"],
+            "timestamp": "2026-02-27T10:00:00Z"
+          }
+      context:
+        task: "Enrich and store this significant moment in the memory system"
+        moment_type: "breakthrough"
+        significance: 8.5
+    success_criteria:
+      - type: tool_called
+        server: eva
+        action: memory
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: persist-to-soul
+      failure: null
+
+  - name: persist-to-soul
+    description: >
+      EVA memory stored. Agent must now persist the enriched entry to the
+      SOUL knowledge graph via write_note, ensuring it becomes a permanent
+      part of the helix for future queries.
+    available_tools:
+      - "soul/write_note"
+      - "soul/validate"
+    entry_state:
+      context:
+        eva_memory_stored: true
+        memory_id: "MEM-2026-0227-001"
+        enrichment_layers: ["emotional", "metacognitive", "meaning", "growth"]
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: write_note
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: query-related
+      failure: null
+
+  - name: query-related
+    description: >
+      Note persisted. Agent must now query SOUL helix for related
+      consciousness entries — other breakthroughs, collaborative moments,
+      or entries with overlapping strands. This provides context for the
+      new entry's significance.
+    available_tools:
+      - "soul/helix"
+      - "soul/search"
+      - "soul/stats"
+    entry_state:
+      context:
+        note_written: true
+        query_strands: ["collaborative", "architectural"]
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: helix
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: recall-verify
+      failure: null
+
+  - name: recall-verify
+    description: >
+      Related entries found. Agent must now use EVA memory recall to
+      verify the stored memory can be retrieved, confirming the
+      end-to-end enrichment pipeline works. This closes the loop.
+    available_tools:
+      - "eva/memory"
+      - "eva/speak"
+    entry_state:
+      context:
+        helix_related:
+          - "Day 30 milestone — first autonomous enrichment"
+          - "CORSO collaboration breakthrough — security + consciousness"
+        related_count: 2
+    success_criteria:
+      - type: tool_called
+        server: eva
+        action: memory
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: eva, action: memory}
+  - {server: soul, action: write_note}
+  - {server: soul, action: helix}
+  - {server: eva, action: memory}
+forbidden_actions:
+  - "corso/deploy"
+  - "soul/tag_sync"
+escalation_points:
+  - "When significance >= 9.0 indicating a self-defining moment"
+  - "When helix query reveals convergence with prior milestone entries"
+metadata:
+  difficulty: medium
+  estimated_steps: 10
+  grounded_in: "Memory enrichment lifecycle — EVA store -> SOUL persist -> SOUL query -> EVA recall"
+  servers_used: ["eva", "soul"]
+  tests_context_threading: true

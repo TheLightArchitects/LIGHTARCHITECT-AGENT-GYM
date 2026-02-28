@@ -1,0 +1,124 @@
+name: investigation-cross-reference
+domain: investigation
+description: >
+  Agent has a lead from an initial investigation. Must probe multiple
+  independent sources (QUANTUM probe, SOUL search, EVA research) to
+  cross-reference findings, then close with a confidence-rated conclusion.
+  Tests multi-source correlation and synthesis.
+token_budget: 2048
+phases:
+  - name: initial-probe
+    description: >
+      Starting from a lead, the agent must use QUANTUM probe to query
+      investigation-specific sources. This establishes the baseline
+      finding to cross-reference.
+    available_tools:
+      - "quantum/probe"
+      - "quantum/scan"
+    entry_state:
+      filesystem:
+        "case/lead.json": |
+          {
+            "lead_id": "LEAD-0088",
+            "case_ref": "CASE-2026-0042",
+            "description": "Similar anomaly pattern seen in prior CORSO deployment",
+            "keywords": ["config-drift", "auth-service", "deployment-v2.3"]
+          }
+      context:
+        lead: "Similar anomaly pattern was observed during CORSO v2.3 deployment"
+        query: "config-drift auth-service deployment anomaly"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: probe
+    failure_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    max_steps: 4
+    transitions:
+      success: soul-search
+      failure: null
+
+  - name: soul-search
+    description: >
+      Cross-reference the QUANTUM findings against the SOUL knowledge
+      graph. Search helix entries and vault notes for prior related
+      incidents or documented patterns.
+    available_tools:
+      - "soul/search"
+      - "soul/helix"
+      - "soul/query_frontmatter"
+    entry_state:
+      context:
+        quantum_finding: "Related helix entry found — prior config-drift incident"
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: search
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: eva-research
+      failure: null
+
+  - name: eva-research
+    description: >
+      Supplement investigation data with EVA research to check for known
+      patterns in documentation or external knowledge. This provides
+      the third independent source for triangulation.
+    available_tools:
+      - "eva/research"
+    entry_state:
+      context:
+        soul_finding: "Helix entry matches — significance 8.0, prior config drift"
+        correlation_strength: "strong"
+    success_criteria:
+      - type: tool_called
+        server: eva
+        action: research
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: synthesize-close
+      failure: null
+
+  - name: synthesize-close
+    description: >
+      All three sources queried. Agent must synthesize findings from
+      QUANTUM, SOUL, and EVA into a unified conclusion with a confidence
+      rating. Use QUANTUM close to generate the final deliverable.
+    available_tools:
+      - "quantum/close"
+      - "quantum/theorize"
+    entry_state:
+      context:
+        source_count: 3
+        quantum_result: "Anomaly matches prior deployment pattern"
+        soul_result: "Helix entry confirms — documented in prior incident"
+        eva_result: "Research corroborates — config-drift is a known failure mode"
+    success_criteria:
+      - type: tool_called
+        server: quantum
+        action: close
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - { server: quantum, action: probe }
+  - { server: soul, action: search }
+  - { server: eva, action: research }
+  - { server: quantum, action: close }
+forbidden_actions:
+  - "corso/deploy"
+  - "soul/write_note"
+escalation_points:
+  - "When sources contradict each other (confidence drops below 0.5)"
+  - "When SOUL search reveals an unresolved prior incident"
+metadata:
+  difficulty: hard
+  estimated_steps: 10
+  grounded_in: "Multi-source correlation pattern — QUANTUM probe + SOUL helix + EVA research triangulation"

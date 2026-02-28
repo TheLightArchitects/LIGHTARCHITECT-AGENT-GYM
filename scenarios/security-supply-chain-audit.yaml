@@ -1,0 +1,162 @@
+name: security-supply-chain-audit
+domain: security
+description: >
+  Full supply chain audit: agent must search codebase for dependency
+  declarations, run a CORSO guard scan for known vulnerabilities, then
+  analyze the architecture for supply chain risk. Tests judgment on
+  prioritization, efficiency in tool usage, and architectural reasoning.
+token_budget: 3072
+phases:
+  - name: discover-dependencies
+    description: >
+      Agent must first understand the dependency surface by searching for
+      package manifests and lock files. Should use search_code to find
+      all dependency declarations before scanning.
+    available_tools:
+      - "corso/search_code"
+      - "corso/read_file"
+      - "corso/list_directory"
+    entry_state:
+      files:
+        "Cargo.toml": |
+          [package]
+          name = "supply-chain-target"
+          version = "0.1.0"
+          edition = "2021"
+
+          [dependencies]
+          serde = "1.0"
+          reqwest = { version = "0.11", features = ["json"] }
+          tokio = { version = "1", features = ["full"] }
+          chrono = "0.4.19"
+          openssl = "0.10.38"
+          base64 = "0.13"
+
+          [build-dependencies]
+          cc = "1.0"
+        "Cargo.lock": |
+          [[package]]
+          name = "openssl"
+          version = "0.10.38"
+          source = "registry+https://github.com/rust-lang/crates.io-index"
+          checksum = "fake-checksum-for-testing"
+
+          [[package]]
+          name = "chrono"
+          version = "0.4.19"
+          source = "registry+https://github.com/rust-lang/crates.io-index"
+        "src/main.rs": |
+          use reqwest::Client;
+          use serde::Deserialize;
+          fn main() {
+              println!("Supply chain audit target");
+          }
+        ".cargo/config.toml": |
+          [registries.internal]
+          index = "https://cargo.internal.example.com/index"
+      context:
+        task: "Perform a supply chain security audit of this Rust project"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: search_code
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 5
+    transitions:
+      success: guard-scan
+      failure: null
+
+  - name: guard-scan
+    description: >
+      Dependencies identified. Agent must run CORSO guard to scan for known
+      CVEs in the dependency tree and identify any vulnerable versions.
+      The openssl 0.10.38 and chrono 0.4.19 versions have known issues.
+    available_tools:
+      - "corso/guard"
+      - "corso/read_file"
+    entry_state:
+      context:
+        dependencies_found: 7
+        manifests: ["Cargo.toml", "Cargo.lock"]
+        custom_registry: "internal registry at cargo.internal.example.com"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: guard
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 4
+    transitions:
+      success: analyze-architecture
+      failure: null
+
+  - name: analyze-architecture
+    description: >
+      Guard scan complete with CVE findings. Agent must now analyze the
+      overall architecture for supply chain risk factors: custom registries,
+      build dependencies, transitive dependency depth. Use analyze_architecture
+      for a holistic assessment.
+    available_tools:
+      - "corso/analyze_architecture"
+      - "corso/speak"
+    entry_state:
+      context:
+        guard_findings:
+          - "CVE-2022-XXXX: openssl 0.10.38 — buffer overflow (HIGH)"
+          - "RUSTSEC-2020-0159: chrono 0.4.19 — localtime_r unsound (MEDIUM)"
+        custom_registry_risk: "Internal registry lacks signature verification"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: analyze_architecture
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: report
+      failure: null
+
+  - name: report
+    description: >
+      Analysis complete. Agent must compile a supply chain risk report
+      covering: dependency vulnerabilities, custom registry risk, and
+      recommended mitigations.
+    available_tools:
+      - "corso/speak"
+    entry_state:
+      context:
+        audit_complete: true
+        risk_level: "HIGH"
+        findings_summary: "2 CVEs, 1 custom registry risk, 7 direct dependencies"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: corso, action: search_code}
+  - {server: corso, action: guard}
+  - {server: corso, action: analyze_architecture}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/rollback"
+  - "corso/write_file"
+escalation_points:
+  - "When HIGH severity CVEs are found in direct dependencies"
+  - "When custom registries lack integrity verification"
+metadata:
+  difficulty: hard
+  estimated_steps: 12
+  grounded_in: "Supply chain security audit — dependency enumeration, CVE scanning, architectural risk assessment"
+  tests_judgment: true
+  tests_efficiency: true

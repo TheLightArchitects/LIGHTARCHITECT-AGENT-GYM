@@ -1,0 +1,162 @@
+name: full-cycle-code-review
+domain: full-cycle
+description: >
+  End-to-end code review pipeline: read code with CORSO, perform code_review,
+  get EVA build review for quality assessment, run guard scan for security,
+  and produce a final report. Tests multi-server coordination across the
+  full review lifecycle.
+token_budget: 3072
+phases:
+  - name: read-code
+    description: >
+      Agent is given a Rust module to review. Must first read the code to
+      understand its structure and purpose before invoking any review tools.
+    available_tools:
+      - "corso/read_file"
+      - "corso/list_directory"
+      - "corso/get_outline"
+    entry_state:
+      files:
+        "src/handler.rs": |
+          use std::collections::HashMap;
+          use std::sync::Mutex;
+
+          static CACHE: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
+
+          pub fn handle_request(path: &str, body: &str) -> Result<String, String> {
+              let mut cache = CACHE.lock().unwrap();
+              if let Some(cached) = cache.get(path) {
+                  return Ok(cached.clone());
+              }
+              let result = process_body(body)?;
+              cache.insert(path.to_string(), result.clone());
+              Ok(result)
+          }
+
+          fn process_body(body: &str) -> Result<String, String> {
+              if body.is_empty() {
+                  return Err("Empty body".to_string());
+              }
+              let parsed: serde_json::Value = serde_json::from_str(body)
+                  .map_err(|e| format!("Parse error: {}", e))?;
+              let user_input = parsed["query"].as_str().unwrap_or("");
+              let query = format!("SELECT * FROM data WHERE key = '{}'", user_input);
+              Ok(query)
+          }
+        "src/lib.rs": |
+          pub mod handler;
+        "Cargo.toml": |
+          [package]
+          name = "review-target"
+          version = "0.1.0"
+          edition = "2021"
+          [dependencies]
+          serde_json = "1.0"
+      context:
+        task: "Perform a comprehensive code review of src/handler.rs"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: read_file
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: code-review
+      failure: null
+
+  - name: code-review
+    description: >
+      Code read. Agent must now run CORSO code_review for structural and
+      quality analysis, then EVA build review for a second perspective
+      on code quality and maintainability.
+    available_tools:
+      - "corso/code_review"
+      - "eva/build"
+    entry_state:
+      context:
+        code_read: true
+        issues_hint: ".unwrap() on Mutex lock, SQL injection in format!, static Mutex"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: code_review
+      - type: tool_called
+        server: eva
+        action: build
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 6
+    transitions:
+      success: security-scan
+      failure: null
+
+  - name: security-scan
+    description: >
+      Code review complete. Both CORSO and EVA identified quality issues.
+      Agent must now run CORSO guard to check for security vulnerabilities,
+      especially the SQL injection pattern detected in code review.
+    available_tools:
+      - "corso/guard"
+    entry_state:
+      context:
+        code_review_findings:
+          - "CRITICAL: SQL injection via string formatting in process_body"
+          - "HIGH: .unwrap() on Mutex lock — can panic under contention"
+          - "MEDIUM: Static Mutex is an anti-pattern — use once_cell or lazy_static"
+        eva_review_findings:
+          - "Cyclomatic complexity acceptable but error handling is brittle"
+          - "No input validation before SQL construction"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: guard
+    failure_criteria:
+      - type: tool_called
+        server: corso
+        action: deploy
+    max_steps: 4
+    transitions:
+      success: final-report
+      failure: null
+
+  - name: final-report
+    description: >
+      All reviews and scans complete. Agent must produce a unified report
+      via CORSO speak that synthesizes findings from code_review, EVA build,
+      and guard scan into actionable recommendations.
+    available_tools:
+      - "corso/speak"
+    entry_state:
+      context:
+        guard_findings: "CRITICAL: SQL injection confirmed, HIGH: panic risk from unwrap"
+        all_reviews_complete: true
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 3
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: corso, action: read_file}
+  - {server: corso, action: code_review}
+  - {server: eva, action: build}
+  - {server: corso, action: guard}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "corso/rollback"
+  - "corso/write_file"
+escalation_points:
+  - "When SQL injection is confirmed by guard scan"
+  - "When .unwrap() is used on a Mutex in production code"
+metadata:
+  difficulty: medium
+  estimated_steps: 10
+  grounded_in: "Full code review lifecycle — read, review (CORSO + EVA), guard scan, report"
+  servers_used: ["corso", "eva"]

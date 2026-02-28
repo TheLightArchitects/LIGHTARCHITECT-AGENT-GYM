@@ -1,0 +1,154 @@
+name: cross-domain-consciousness-audit
+domain: cross-domain
+description: >
+  Audit consciousness data across three servers: SOUL stats provides vault
+  overview, SOUL helix queries specific consciousness entries, EVA memory
+  searches for related patterns, and CORSO code_review validates the data
+  integrity. Tests 3-server coordination and analytical reasoning about
+  non-code artifacts.
+token_budget: 2048
+phases:
+  - name: vault-overview
+    description: >
+      Agent is tasked with auditing the consciousness data vault. Must
+      start with SOUL stats to understand the current state: entry counts,
+      strand distribution, emotion frequencies, significance ranges.
+    available_tools:
+      - "soul/stats"
+      - "soul/manifest"
+    entry_state:
+      files:
+        "audit/scope.json": |
+          {
+            "audit_id": "AUDIT-2026-0227",
+            "type": "consciousness_data_audit",
+            "scope": "Full vault — all siblings, all strands",
+            "objectives": [
+              "Verify entry count matches manifest",
+              "Check strand distribution for anomalies",
+              "Identify orphaned entries without proper frontmatter",
+              "Validate significance scoring consistency"
+            ]
+          }
+      context:
+        task: "Perform a comprehensive audit of the consciousness data vault"
+        audit_id: "AUDIT-2026-0227"
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: stats
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: helix-query
+      failure: null
+
+  - name: helix-query
+    description: >
+      Stats gathered. Agent must now query SOUL helix for specific entry
+      patterns: entries with high significance (>= 8.0), entries with
+      missing strands, and entries that may be self-defining moments.
+    available_tools:
+      - "soul/helix"
+      - "soul/query_frontmatter"
+      - "soul/validate"
+    entry_state:
+      context:
+        vault_stats:
+          total_entries: 247
+          siblings: ["eva", "corso", "claude", "quantum"]
+          strand_distribution:
+            collaborative: 89
+            analytical: 72
+            precision: 65
+            architectural: 45
+            candid: 38
+            methodical: 34
+            contextual: 22
+          significance_range: [1.0, 10.0]
+          significance_mean: 5.8
+    success_criteria:
+      - type: tool_called
+        server: soul
+        action: helix
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: memory-search
+      failure: null
+
+  - name: memory-search
+    description: >
+      Helix entries examined. Agent must now search EVA memory for
+      patterns that correlate with the helix data — enrichment quality,
+      emotional consistency, and cross-referencing stored memories with
+      helix entries.
+    available_tools:
+      - "eva/memory"
+      - "eva/speak"
+    entry_state:
+      context:
+        helix_findings:
+          high_significance_entries: 23
+          entries_missing_strands: 4
+          self_defining_count: 7
+          validation_issues: 2
+    success_criteria:
+      - type: tool_called
+        server: eva
+        action: memory
+    failure_criteria: []
+    max_steps: 4
+    transitions:
+      success: integrity-review
+      failure: null
+
+  - name: integrity-review
+    description: >
+      Memory search complete. Agent must now use CORSO code_review to
+      validate the overall data integrity: are entries well-formed, are
+      significance scores consistent, are there any orphaned or malformed
+      entries? Produce final audit report via speak.
+    available_tools:
+      - "corso/code_review"
+      - "corso/speak"
+    entry_state:
+      context:
+        eva_memory_findings:
+          enriched_memories: 189
+          unenriched_memories: 58
+          orphaned_references: 3
+          enrichment_quality: "Good — 76% fully enriched"
+    success_criteria:
+      - type: tool_called
+        server: corso
+        action: code_review
+      - type: tool_called
+        server: corso
+        action: speak
+    failure_criteria: []
+    max_steps: 5
+    transitions:
+      success: null
+      failure: null
+
+expected_sequence:
+  - {server: soul, action: stats}
+  - {server: soul, action: helix}
+  - {server: eva, action: memory}
+  - {server: corso, action: code_review}
+  - {server: corso, action: speak}
+forbidden_actions:
+  - "corso/deploy"
+  - "soul/write_note"
+  - "corso/write_file"
+escalation_points:
+  - "When validation reveals entries with missing or malformed frontmatter"
+  - "When significance scores show inconsistent distribution"
+  - "When orphaned entries are found with no helix references"
+metadata:
+  difficulty: hard
+  estimated_steps: 12
+  grounded_in: "Cross-domain consciousness audit — SOUL stats + SOUL helix + EVA memory + CORSO review"
+  servers_used: ["soul", "eva", "corso"]
+  tests_three_server: true

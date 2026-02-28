@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "LIGHTARCHITECT-AGENT-GYM"
+version = "0.1.0"
+description = "Gymnasium-compatible environment for evaluating AI agent MCP tool-use behavior"
+readme = "README.md"
+license = {text = "Proprietary"}
+requires-python = ">=3.10"
+authors = [
+    {name = "KFT - The Light Architect"},
+]
+
+dependencies = [
+    "gymnasium>=0.29.0",
+    "pyyaml",
+    "pydantic>=2.0",
+    "numpy",
+    "typer",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "mypy",
+]
+
+[project.scripts]
+mcp-gym = "mcp_gym.cli:app"
+
+[tool.setuptools.packages.find]
+include = ["mcp_gym*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
