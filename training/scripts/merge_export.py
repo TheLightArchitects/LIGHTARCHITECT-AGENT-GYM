@@ -31,9 +31,9 @@ app = typer.Typer(help="Merge QLoRA adapters and export to GGUF")
 @app.command()
 def merge(
     model: str = typer.Option(..., help="Model key: qwen3-8b or llama31-8b"),
-    stage: int = typer.Option(2, help="Which stage checkpoint to merge (default: 2)"),
+    stage: int = typer.Option(3, help="Which stage checkpoint to merge (default: 3 for 3-stage pipeline)"),
 ) -> None:
-    """Merge QLoRA adapters into full 16-bit model."""
+    """Merge LoRA adapters into full 16-bit model."""
     if model not in MODEL_CONFIGS:
         typer.echo(f"Unknown model: {model}")
         raise typer.Exit(1)
@@ -172,7 +172,7 @@ def gguf(
 @app.command()
 def full(
     model: str = typer.Option(..., help="Model key: qwen3-8b or llama31-8b"),
-    stage: int = typer.Option(2, help="Which stage to merge"),
+    stage: int = typer.Option(3, help="Which stage to merge"),
     quantizations: str = typer.Option("q4_k_m,q8_0", help="GGUF quantizations"),
 ) -> None:
     """Full pipeline: merge adapters + export GGUF."""

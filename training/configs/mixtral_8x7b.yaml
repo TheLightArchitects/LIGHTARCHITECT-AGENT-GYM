@@ -1,0 +1,61 @@
+# Mixtral 8x7B MoE model configuration — PRIMARY TARGET
+# Inherits from base.yaml, overrides model-specific and MoE-specific settings
+#
+# Architecture: 8 experts, top-2 routing, 46.7B total / 12.9B active per token
+# Reference: arXiv:2401.04088 (Mistral AI)
+#
+# MoE Fine-Tuning Reference:
+#   - Unsloth: bf16 LoRA preferred over 4-bit QLoRA for MoE stability
+#   - ESFT (arXiv:2407.01906): Expert-Specialized Fine-Tuning
+#   - Router is FROZEN during SFT (pretrained routing is stable)
+#   - LoRA rank 64 recommended for MoE (8x adapters vs dense models)
+
+model:
+  name: "mistralai/Mixtral-8x7B-Instruct-v0.1"
+  dtype: null  # Auto-detect (bf16 preferred)
+  load_in_4bit: false  # bf16 LoRA — NOT 4-bit QLoRA (MoE stability, per Unsloth docs)
+  max_seq_length: 4096
+  trust_remote_code: false
+  is_moe: true  # Flag for MoE-specific handling in training scripts
+
+# MoE-specific LoRA overrides (base.yaml has dense defaults)
+lora:
+  r: 64          # Rank 64 for MoE (Unsloth benchmark config)
+  alpha: 64      # alpha = rank (scaling factor 1.0)
+  # Target attention + ALL expert FFN layers (8 experts x 3 layers each)
+  target_modules:
+    - "q_proj"
+    - "k_proj"
+    - "v_proj"
+    - "o_proj"
+    - "w1"         # Expert gate projection
+    - "w2"         # Expert down projection
+    - "w3"         # Expert up projection
+  dropout: 0.0    # No dropout (Unsloth recommendation for MoE)
+  bias: "none"
+  use_gradient_checkpointing: "unsloth"  # Critical for MoE VRAM
+  random_state: 3407
+  # NOTE: Router (gate) layer is NOT in target_modules — frozen by default.
+  # The pretrained router already has stable token-to-expert assignments.
+  # Training it during SFT destabilizes expert utilization.
+
+# Chat template — Mixtral Instruct uses ChatML-like format
+chat_template: "mistral"
+
+# Output naming
+output:
+  model_id: "light-architects-mixtral-8x7b"
+  stage1_dir: "checkpoints/mixtral-8x7b-stage1-identity"
+  stage2_dir: "checkpoints/mixtral-8x7b-stage2-tools"
+  stage3_dir: "checkpoints/mixtral-8x7b-stage3-integration"
+  merged_dir: "checkpoints/mixtral-8x7b-merged-16bit"
+  gguf_dir: "checkpoints/mixtral-8x7b-gguf"
+
+# Monitoring
+monitoring:
+  wandb_run_name: "mixtral-8x7b-sft"
+  wandb_tags: ["mixtral", "8x7b", "moe", "sft", "lora", "primary"]
+
+# VRAM estimate: ~48GB for bf16 LoRA r=64 on Mixtral 8x7B
+# Recommended GPU: A100 80GB, or 2xA40 48GB
+# For 4-bit QLoRA fallback: ~24GB (A100 40GB), but may be less stable

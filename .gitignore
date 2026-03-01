@@ -24,12 +24,13 @@ htmlcov/
 # Rust
 target/
 
-# Large binary files
+# Large binary/data files
 *.mp3
 *.wav
 *.bin
 *.gguf
 checkpoints/
+pipeline-output/
 
 # OS
 .DS_Store

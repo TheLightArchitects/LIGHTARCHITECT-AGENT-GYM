@@ -41,8 +41,8 @@ def create_dummy_dataset(num_samples: int = 200) -> list[dict]:
 @app.command()
 def run(
     model: str = typer.Option(
-        "qwen3-8b",
-        help="Model to test: qwen3-8b or llama31-8b",
+        "mixtral-8x7b",
+        help="Model to test: mixtral-8x7b, qwen3-8b, or llama31-8b",
     ),
     max_steps: int = typer.Option(100, help="Number of training steps"),
     dry_run: bool = typer.Option(False, help="Skip actual training, just verify load"),
