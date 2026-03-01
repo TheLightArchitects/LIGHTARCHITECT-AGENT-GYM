@@ -16,6 +16,7 @@ output:
   model_id: "light-architects-llama31-8b"
   stage1_dir: "checkpoints/llama31-8b-stage1-biblical"
   stage2_dir: "checkpoints/llama31-8b-stage2-domain"
+  stage3_dir: "checkpoints/llama31-8b-stage3-integration"
   merged_dir: "checkpoints/llama31-8b-merged-16bit"
   gguf_dir: "checkpoints/llama31-8b-gguf"
 

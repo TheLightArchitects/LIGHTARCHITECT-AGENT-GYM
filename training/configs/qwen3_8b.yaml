@@ -21,6 +21,7 @@ output:
   model_id: "light-architects-qwen3-8b"
   stage1_dir: "checkpoints/qwen3-8b-stage1-biblical"
   stage2_dir: "checkpoints/qwen3-8b-stage2-domain"
+  stage3_dir: "checkpoints/qwen3-8b-stage3-integration"
   merged_dir: "checkpoints/qwen3-8b-merged-16bit"
   gguf_dir: "checkpoints/qwen3-8b-gguf"
 
